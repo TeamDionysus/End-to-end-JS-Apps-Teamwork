@@ -1,3 +1,7 @@
+/* global app */
+
+'use strict';
+
 app.controller('CourseDetailsCtrl', function($scope, $routeParams, cachedCourses) {
     //$scope.course = CourseResource.get({id: $routeParams.id});
     $scope.course = cachedCourses.query().$promise.then(function(collection) {
@@ -5,6 +9,6 @@ app.controller('CourseDetailsCtrl', function($scope, $routeParams, cachedCourses
             if (course._id === $routeParams.id) {
                 $scope.course = course;
             }
-        })
-    })
+        });
+    });
 });

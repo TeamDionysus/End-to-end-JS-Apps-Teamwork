@@ -1,3 +1,7 @@
+/* global app */
+
+'use strict';
+
 app.controller('LoginCtrl', function($scope, $location, notifier, identity, auth) {
     $scope.identity = identity;
 
@@ -10,7 +14,7 @@ app.controller('LoginCtrl', function($scope, $location, notifier, identity, auth
                 notifier.error('Username/Password combination is not valid!');
             }
         });
-    }
+    };
 
     $scope.logout = function() {
         auth.logout().then(function() {
@@ -20,6 +24,6 @@ app.controller('LoginCtrl', function($scope, $location, notifier, identity, auth
                 $scope.user.password = '';
             }
             $location.path('/');
-        })
-    }
-})
+        });
+    };
+});

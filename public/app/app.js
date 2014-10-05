@@ -1,3 +1,7 @@
+/* global angular, toastr */
+
+'use strict';
+
 var app = angular.module('app', ['ngResource', 'ngRoute']).value('toastr', toastr);
 
 app.config(function($routeProvider, $locationProvider) {
@@ -42,7 +46,7 @@ app.config(function($routeProvider, $locationProvider) {
             templateUrl: '/partials/admin/users-list',
             controller: 'UserListCtrl',
             resolve: routeUserChecks.adminRole
-        })
+        });
 });
 
 app.run(function($rootScope, $location) {
@@ -50,5 +54,5 @@ app.run(function($rootScope, $location) {
         if (rejection === 'not authorized') {
             $location.path('/');
         }
-    })
+    });
 });
