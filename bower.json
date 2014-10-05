@@ -1,0 +1,30 @@
+{
+  "name": "End-to-end-JS-Apps-Teamwork",
+  "version": "0.0.1",
+  "homepage": "https://github.com/TeamDionysus/End-to-end-JS-Apps-Teamwork",
+  "authors": [
+    "StefanSinapov",
+    "valentin-lozev",
+    "neutrino-git",
+    "izabelk"
+  ],
+  "description": "MEAN Stack Application",
+  "main": "server.js",
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "./public/lib",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "~2.1.1",
+    "toastr": "~2.0.3",
+    "angular": "~1.2.26",
+    "angular-resource": "~1.2.26",
+    "angular-route": "~1.2.26",
+    "bootstrap": "~3.2.0"
+  }
+}
