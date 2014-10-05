@@ -14,12 +14,7 @@ var userSchema = mongoose.Schema({
 
 userSchema.method({
     authenticate: function(password) {
-        if (encryption.generateHashedPassword(this.salt, password) === this.hashPass) {
-            return true;
-        }
-        else {
-            return false;
-        }
+        return encryption.generateHashedPassword(this.salt, password) === this.hashPass;
     }
 });
 
@@ -45,6 +40,10 @@ module.exports.seedInitialUsers = function() {
             salt = encryption.generateSalt();
             hashedPwd = encryption.generateHashedPassword(salt, 'Doncho');
             User.create({username: 'Doncho', firstName: 'Doncho', lastName: 'Minkov', salt: salt, hashPass: hashedPwd});
+            salt = encryption.generateSalt();
+            hashedPwd = encryption.generateHashedPassword(salt, 'admin');
+            User.create({username: 'admin', firstName: 'Administrator', lastName: 'Administrator', salt: salt, hashPass: hashedPwd});
+
             console.log('Users added to database...');
         }
     });

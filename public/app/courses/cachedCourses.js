@@ -1,3 +1,7 @@
+/* global app */
+
+'use strict';
+
 app.factory('cachedCourses', function(CourseResource) {
     var cachedCourses;
 
@@ -9,5 +13,5 @@ app.factory('cachedCourses', function(CourseResource) {
 
             return cachedCourses;
         }
-    }
+    };
 });

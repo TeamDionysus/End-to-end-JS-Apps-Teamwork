@@ -1,9 +1,14 @@
+/* global app, angular */
+
+'use strict';
+
+
 app.factory('auth', function($http, $q, identity, UsersResource) {
     return {
         signup: function(user) {
             var deferred = $q.defer();
 
-            var user = new UsersResource(user);
+            user = new UsersResource(user);
             user.$save().then(function() {
                 identity.currentUser = user;
                 deferred.resolve();
@@ -51,7 +56,7 @@ app.factory('auth', function($http, $q, identity, UsersResource) {
             $http.post('/logout').success(function() {
                 identity.currentUser = undefined;
                 deferred.resolve();
-            })
+            });
 
             return deferred.promise;
         },
@@ -71,5 +76,5 @@ app.factory('auth', function($http, $q, identity, UsersResource) {
                 return $q.reject('not authorized');
             }
         }
-    }
-})
+    };
+});
