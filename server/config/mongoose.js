@@ -19,7 +19,9 @@ module.exports = function (config) {
     db.on('error', function (err) {
         console.log('Database error: ' + err);
     });
+    
+    Models.User.init();
 
     Models.User.seedInitialUsers();
-    Models.Course.seedInitialCourses();
+    Models.Item.seedInitialCourses();
 };

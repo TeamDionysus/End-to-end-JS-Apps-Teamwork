@@ -3,24 +3,32 @@
 var mongoose = require('mongoose'),
     encryption = require('../utilities/encryption');
 
-var userSchema = mongoose.Schema({
-    username: { type: String, require: '{PATH} is required', unique: true },
-    firstName: { type: String, require: '{PATH} is required' },
-    lastName: { type: String, require: '{PATH} is required' },
-    salt: String,
-    hashPass: String,
-    roles: [String]
-});
+var User;
 
-userSchema.method({
-    authenticate: function(password) {
-        return encryption.generateHashedPassword(this.salt, password) === this.hashPass;
-    }
-});
+module.exports.init = function () {
+    var userSchema = mongoose.Schema({
+        username: { type: String, require: '{PATH} is required', unique: true },
+        firstName: { type: String, require: '{PATH} is required' },
+        lastName: { type: String, require: '{PATH} is required' },
+        salt: String,
+        hashPass: String,
+        roles: [String],
+        city: String,
+        items: [mongoose.model('Item').schema],
+        phone: String
+    });
 
-var User = mongoose.model('User', userSchema);
+    userSchema.method({
+        authenticate: function(password) {
+            return encryption.generateHashedPassword(this.salt, password) === this.hashPass;
+        }
+    });
 
-module.exports.seedInitialUsers = function() {
+    User = mongoose.model('User', userSchema);
+}
+
+module.exports.seedInitialUsers = function() {    
+
     User.find({}).exec(function(err, collection) {
         if (err) {
             console.log('Cannot find users: ' + err);
