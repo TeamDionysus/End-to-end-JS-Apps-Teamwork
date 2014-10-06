@@ -1,9 +1,9 @@
 'use strict';
 
 var UserModel = require('../models/user'),
-    CourseModel = require('../models/course');
+    ItemModel = require('../models/item');
 
 module.exports = {
     User : UserModel,
-    Course : CourseModel
+    Item : ItemModel
 };

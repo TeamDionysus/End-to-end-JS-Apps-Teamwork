@@ -21,5 +21,5 @@ module.exports = function (config) {
     });
 
     Models.User.seedInitialUsers();
-    Models.Course.seedInitialCourses();
+    Models.Item.seedInitialCourses();
 };

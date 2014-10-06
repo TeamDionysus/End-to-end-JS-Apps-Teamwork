@@ -11,8 +11,9 @@ module.exports = function (app) {
     app.post('/login', auth.login);
     app.post('/logout', auth.logout);
 
-    app.get('/api/courses', controllers.courses.getAllCourses);
-    app.get('/api/courses/:id', controllers.courses.getCourseById);
+    app.get('/api/items', controllers.items.getAllItems);
+    app.get('/api/items/:id', controllers.items.getItemById);
+    // add routes for items put/post (CRUD)
 
     app.get('/partials/:partialArea/:partialName', function (req, res) {
         res.render('../../public/app/' + req.params.partialArea + '/' + req.params.partialName);
