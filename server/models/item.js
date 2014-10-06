@@ -3,7 +3,7 @@
 var mongoose = require('mongoose');
 
 var itemsSchema = mongoose.Schema({
-    title: { type: String, required: true },
+    title: { type: String, required: '{PATH} is required' },
     description: String,
     featured: Boolean,
     published: Date,
@@ -21,7 +21,7 @@ var Item = mongoose.model('Item', itemsSchema);
 module.exports.seedInitialCourses = function() {
     Item.find({}).exec(function(err, collection) {
         if (err) {
-            console.log('Cannot find courses: ' + err);
+            console.log('Cannot find items: ' + err);
             return;
         }
 
