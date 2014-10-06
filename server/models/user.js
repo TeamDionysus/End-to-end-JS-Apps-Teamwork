@@ -14,6 +14,7 @@ module.exports.init = function () {
         hashPass: String,
         roles: [String],
         city: String,
+        imageUrl: String,
         items: [mongoose.model('Item').schema],
         phone: String
     });
@@ -25,7 +26,7 @@ module.exports.init = function () {
     });
 
     User = mongoose.model('User', userSchema);
-}
+};
 
 module.exports.seedInitialUsers = function() {    
 
@@ -50,7 +51,7 @@ module.exports.seedInitialUsers = function() {
             User.create({username: 'Doncho', firstName: 'Doncho', lastName: 'Minkov', salt: salt, hashPass: hashedPwd});
             salt = encryption.generateSalt();
             hashedPwd = encryption.generateHashedPassword(salt, 'admin');
-            User.create({username: 'admin', firstName: 'Administrator', lastName: 'Administrator', salt: salt, hashPass: hashedPwd});
+            User.create({username: 'admin', firstName: 'Administrator', lastName: 'Administrator', salt: salt, hashPass: hashedPwd, roles: ['admin']});
 
             console.log('Users added to database...');
         }

@@ -4,12 +4,16 @@ var auth = require('./auth'),
     controllers = require('../controllers');
 
 module.exports = function (app) {
-    app.get('/api/users', auth.isInRole('admin'), controllers.users.getAllUsers);
-    app.post('/api/users', controllers.users.createUser);
-    app.put('/api/users', auth.isAuthenticated, controllers.users.updateUser);
-    // put('api/users/:id' (auth.isInRole(admin) //update from admin
-    // delete (auth.isInRole('admin')
-    // get ?page,name,orderBy, orderType
+    app.route('/api/users')
+        .get(controllers.users.getAllUsers)
+        .post(controllers.users.createUser)
+        .put(auth.isAuthenticated, controllers.users.updateUser);
+
+//    app.route('/api/users/:id')
+//        .get(controllers.users.getById)
+//        .put(auth.isAuthenticated(), controllers.users.voteForUser)
+//        .post(auth.isInRole('admin'), controllers.users.updateByAdmin)
+//        .delete(auth.isInRole('admin'), controllers.users.deleteUser);
 
     app.post('/login', auth.login);
     app.post('/logout', auth.logout);
