@@ -1,4 +1,4 @@
-﻿'use strict';
+'use strict';
 
 app.factory('itemsData', function ($http, $q) {
     
@@ -27,7 +27,25 @@ app.factory('itemsData', function ($http, $q) {
         return deferred.promise;
     };
     
+    var getItems = function(query) {
+        var deferred = $q.defer();
+        
+        query = query ? '?title=' + query : '';
+        console.log('/api/items' + query);
+        
+        $http.get('/api/items' + query)
+            .success(function (items) {
+            deferred.resolve(items);
+        })
+            .error(function (error) {
+            deferred.reject(error);
+        });
+        
+        return deferred.promise;        
+    };
+    
     return {
-        create: createItem
+        create: createItem,
+        getItems: getItems
     }
 });

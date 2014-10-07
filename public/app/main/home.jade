@@ -1,7 +1,14 @@
 .container
     .jumbotron
         h1 NodeJS Teamwork
-        h2 Best offers in the world
+        h2 Best offers in the world                
+    .row
+        .col-md-4
+            input.form-control(type="text", placeholder="Search for item...", ng-model="query")
+        .col-md-8
+            button.btn.btn-primary(ng-click="findItem(query)", ng-disabled="profileForm.$invalid") Search
+            a.btn.btn-success.btn-lg.pull-right(href="#/items/create") Add offer
+    br
     .row
         .col-md-6
             .panel.panel-info
