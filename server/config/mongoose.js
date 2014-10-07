@@ -21,6 +21,7 @@ module.exports = function (config) {
     });
     
     Models.User.init();
+	Models.Category.init();
 
     Models.User.seedInitialUsers();
     Models.Item.seedInitialCourses();
