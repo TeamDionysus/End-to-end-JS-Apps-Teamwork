@@ -4,10 +4,9 @@
 
 app.controller('ItemCreateCtrl', function ($scope, $location, itemsData, notifier) {
     
-    // TODO: remove it if we submit the form automatically
-    $scope.createItem = function (item) {
-        console.dir(item);
-        itemsData.create(item).then(
+    $scope.submit = function (formData) {
+
+        itemsData.create(formData).then(
             function (success) {
                 notifier.success("Offer added successfully!");
                 $location.path('/');
