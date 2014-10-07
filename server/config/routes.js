@@ -17,9 +17,14 @@ module.exports = function (app) {
 
     app.post('/login', auth.login);
     app.post('/logout', auth.logout);
-
-    app.get('/api/items', controllers.items.getAllItems);
-    app.get('/api/items/:id', controllers.items.getItemById);
+    
+    app.route('/api/items')
+        .get(controllers.items.getAllItems)
+        .post(auth.isAuthenticated, controllers.items.createItem);
+    
+    app.route('/api/items/:id')
+        .get(controllers.items.getItemById);
+        
     // add routes for items put/post (CRUD)
     // /api?page={page},orderBy,orderType,name  (GET)
     // /api/items auth.isInRole('admin') (DEL)
