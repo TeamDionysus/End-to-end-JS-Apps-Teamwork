@@ -13,12 +13,12 @@ module.exports = {
         });
     },
     getItemById: function (req, res, next) {
-        Item.findOne({_id: req.params.id}).exec(function (err, course) {
+        Item.findOne({_id: req.params.id}).exec(function (err, item) {
             if (err) {
                 console.log('Item could not be loaded: ' + err);
             }
 
-            res.send(course);
+            res.send(item);
         });
     },
     // add CRUD
