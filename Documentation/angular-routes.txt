@@ -5,7 +5,7 @@
 
 - "/item/:id"
 - "/item/:id/edit" (authorize)
-- "/item/create"
+- "/item/create"                                    - Valio
 
 - "/user/login" (or singin, or in navbar)
 - "/user/register" (or singup)
