@@ -1,0 +1,20 @@
+- "/"
+- "/category/:id"
+- "/user/items" (authorize, private)
+- "/user/:id/items"
+
+- "/item/:id"
+- "/item/:id/edit" (authorize)
+- "/item/create"
+
+- "/user/login" (or singin, or in navbar)
+- "/user/register" (or singup)
+- "/user/profile"
+- "/user/profile-edit"
+
+- "/admin/edit/user/:id"
+- "/admin/edit/item/:id"
+- "/admin/users"
+- "/admin/items"
+
+- "/search"
