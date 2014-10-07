@@ -46,20 +46,24 @@ module.exports = {
                 city: req.body.city
             };
 
-            if (updatedUserData.password && updatedUserData.password.length > 5) {
+            if (req.body.password && req.body.password.length > 5) {
                 updatedUserData.salt = encryption.generateSalt();
                 updatedUserData.hashPass = encryption.generateHashedPassword(updatedUserData.salt, req.body.password);
             }
 
-            User.update({_id: req.body._id}, updatedUserData, function () {
-                res.end();
+            User.update({_id: req.body._id}, updatedUserData, function (err, numberAffectedRows) {
+                if(err){
+                    res.status(400).send('Error updating user data: ' + err);
+                    return;
+                }
+                res.status(200).send('User updated successfully');
             });
         }
         else {
             res.send({reason: 'You do not have permissions!'});
         }
     },
-    getAllUsers: function (req, res) {
+    getAllUsers: function (req, res, next) {
 
         var page = Math.max(req.query.page, 1);
         var orderType = req.query.orderType === 'desc' ? '-' : '';
@@ -78,10 +82,62 @@ module.exports = {
             .select('_id username firstName lastName imageUrl') //city phone roles items
             .exec(function (error, result) {
                 if (error) {
-                    console.error('Error getting users: ' + error);
+                    res.status(400);
+                    res.send(error);
                 } else {
                     res.send(result);
                 }
             });
+    },
+    getById: function (req, res, next) {
+        User
+            .findOne({ _id: req.params.id })
+            .select('_id username firstName lastName imageUrl city phone roles items')
+            .exec(function (err, item) {
+                if (err) {
+                    res.status(400).send('User could not be found: ' + err);
+                    console.log('User could not be found: ' + err);
+                    return;
+                }
+
+                res.send(item);
+            });
+    },
+    deleteUser: function (req, res, next) {
+        User
+            .findOne({ _id: req.params.id })
+            .remove()
+            .exec(function (err, item) {
+                if (err) {
+                    res.status(400).send('User could not be found: ' + err);
+                    console.log('User could not be found: ' + err);
+                    return;
+                }
+
+                res.status(200).send("User deleted successfully from database" + item);
+            });
+    },
+    updateByAdmin: function (req, res, next) {
+
+        var updatedUserData = {
+            _id: req.body._id,
+            firstName: req.body.firstName,
+            lastName: req.body.lastName,
+            phone: req.body.phone,
+            city: req.body.city
+        };
+
+        if (req.body.password && req.body.password.length > 5) {
+            updatedUserData.salt = encryption.generateSalt();
+            updatedUserData.hashPass = encryption.generateHashedPassword(updatedUserData.salt, req.body.password);
+        }
+
+        User.update({_id: req.body._id}, updatedUserData, function (err, numberAffectedRows) {
+            if(err){
+                res.status(400).send('Error updating user data: ' + err);
+                return;
+            }
+            res.status(200).send('User updated successfully');
+        });
     }
 };

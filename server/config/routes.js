@@ -8,13 +8,13 @@ module.exports = function (app) {
         .get(controllers.users.getAllUsers)
         .post(controllers.users.createUser)
         .put(auth.isAuthenticated, controllers.users.updateUser);
-    
-    //    app.route('/api/users/:id')
-    //        .get(controllers.users.getById)
-    //        .put(auth.isAuthenticated(), controllers.users.voteForUser)
-    //        .post(auth.isInRole('admin'), controllers.users.updateByAdmin)
-    //        .delete(auth.isInRole('admin'), controllers.users.deleteUser);
-    
+
+        app.route('/api/users/:id')
+            .get(controllers.users.getById)
+            .post( auth.isInRole('admin'), controllers.users.updateByAdmin)
+            .delete( auth.isInRole('admin'), controllers.users.deleteUser);
+    //.put(auth.isAuthenticated(), controllers.users.voteForUser)
+
     app.post('/login', auth.login);
     app.post('/logout', auth.logout);
     

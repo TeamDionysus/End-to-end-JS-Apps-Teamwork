@@ -28,8 +28,8 @@ module.exports = {
     },
     isAuthenticated: function (req, res, next) {
         if (!req.isAuthenticated()) {
-            res.status(403);
-            res.end();
+            res.status(401);
+            res.send("Not authorized for this content");
         }
         else {
             next();
@@ -37,12 +37,12 @@ module.exports = {
     },
     isInRole: function (role) {
         return function (req, res, next) {
-            if (req.isAuthenticated() && req.user.roles.indexOf(role) > -1) {
+            if (req.isAuthenticated() && req.user.roles.indexOf(role) >= 0) {
                 next();
             }
             else {
-                res.status(403);
-                res.end();
+                res.status(401);
+                res.send("Not authorized for this content");
             }
         };
     }
