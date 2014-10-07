@@ -12,16 +12,19 @@
             form.navbar-form(role="search")
                 
                 select.form-control(ng-model="sort")
-                    option(value=" " ng-selected="'true'") Order by
+                    option(value="-published") Newest
+                    option(value="price") Low price
+                    option(value="-price") High price
                     option(value="title") Title
-                    option(value="published") Published
         
     br
     table.table
         tr
             th Title
+            th Price
             th Published
         tr(ng-repeat="item in items | orderBy: sort")
             td
                 a(href="#/items/{{ item._id }}") {{ item.title }}
+            td {{ item.price | currency }}
             td {{ item.published | date }}

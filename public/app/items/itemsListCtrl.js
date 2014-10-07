@@ -3,7 +3,8 @@
 'use strict';
 
 app.controller('ItemsListCtrl', function($scope, $rootScope, itemsData) {
-    $scope.query = $rootScope.searchQuery || '';    
+    $scope.query = $rootScope.searchQuery || ''; 
+    $scope.sort = '-published';
     findItem($scope.query);
     
     $scope.findItem = findItem;

@@ -31,7 +31,6 @@ app.factory('itemsData', function ($http, $q) {
         var deferred = $q.defer();
         
         query = query ? '?title=' + query : '';
-        console.log('/api/items' + query);
         
         $http.get('/api/items' + query)
             .success(function (items) {
