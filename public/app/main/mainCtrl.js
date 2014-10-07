@@ -8,13 +8,8 @@ app.controller('MainCtrl', function($scope, $rootScope, $location, cachedCourses
     $scope.findItem = function (query) {
         if (query) {
             
-            itemsData
-                .getItems(query)
-                .then(function (data) {
-                    $rootScope.searchedItems = data;
-                    $rootScope.searchQuery = query;
-                    $location.path('/items');
-                });
+            $rootScope.searchQuery = query;
+            $location.path('/items');
         }
     };
 });
