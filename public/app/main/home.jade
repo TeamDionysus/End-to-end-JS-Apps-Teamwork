@@ -3,6 +3,12 @@
         h1 NodeJS Teamwork
         h2 Best offers in the world
     .row
+        .col-md-4
+            input.form-control(type="text", placeholder="Search for item...", ng-model="query")
+            .pull-right
+        button.btn.btn-primary(ng-click="findItem(query)", ng-disabled="profileForm.$invalid") Search
+    br
+    .row
         .col-md-6
             .panel.panel-info
                 .panel-heading.text-center Featured
