@@ -2,7 +2,7 @@
 
 'use strict';
 
-app.controller('ItemsListCtrl', function($scope, $rootScope, cachedCourses, itemsData) {
+app.controller('ItemsListCtrl', function($scope, $rootScope, itemsData) {
     $scope.query = $rootScope.searchQuery || '';    
     findItem($scope.query);
     
@@ -12,7 +12,7 @@ app.controller('ItemsListCtrl', function($scope, $rootScope, cachedCourses, item
         itemsData
             .getItems($scope.query)
             .then(function (data) {
-                $scope.courses = data;
+                $scope.items = data;
             });        
     }
 });

@@ -7,21 +7,21 @@
                 .input-group-btn
                     button.btn.btn-default(ng-click="findItem(query)")
                         i.glyphicon.glyphicon-search
-
+                        
         .col-md-4
-            select.form-control(ng-model="sort")
-                option(value=" " ng-selected="'true'") Default
-                option(value="title") Title
-                option(value="published") Published
-        .col-md-2 Sort
-
+            form.navbar-form(role="search")
+                
+                select.form-control(ng-model="sort")
+                    option(value=" " ng-selected="'true'") Order by
+                    option(value="title") Title
+                    option(value="published") Published
         
     br
     table.table
         tr
             th Title
             th Published
-        tr(ng-repeat="course in courses | filter: search | orderBy: sort")
+        tr(ng-repeat="item in items | orderBy: sort")
             td
-                a(href="#/courses/{{ course._id }}") {{ course.title }}
-            td {{ course.published | date }}
+                a(href="#/items/{{ item._id }}") {{ item.title }}
+            td {{ item.published | date }}

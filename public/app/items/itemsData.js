@@ -44,8 +44,23 @@ app.factory('itemsData', function ($http, $q) {
         return deferred.promise;        
     };
     
+    var getById = function(id) {
+        var deferred = $q.defer();        
+        
+        $http.get('/api/items/' + id)
+            .success(function (items) {
+            deferred.resolve(items);
+        })
+            .error(function (error) {
+            deferred.reject(error);
+        });
+        
+        return deferred.promise;        
+    };
+    
     return {
         create: createItem,
-        getItems: getItems
+        getItems: getItems,
+        getById: getById
     }
 });
