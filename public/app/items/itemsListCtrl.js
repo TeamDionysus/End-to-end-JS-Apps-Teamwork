@@ -3,8 +3,7 @@
 'use strict';
 
 app.controller('ItemsListCtrl', function($scope, $rootScope, cachedCourses, itemsData) {
-    $scope.query = $rootScope.searchQuery || '';
-    
+    $scope.query = $rootScope.searchQuery || '';    
     findItem($scope.query);
     
     $scope.findItem = findItem;
