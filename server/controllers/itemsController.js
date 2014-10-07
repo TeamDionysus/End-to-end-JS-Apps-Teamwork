@@ -4,15 +4,6 @@ var Item = require('mongoose').model('Item');
 var DEFAULT_PAGE_SIZE = 10;
 
 module.exports = {
-//    getAllItems: function (req, res, next) {
-//        Item.find({}).exec(function (err, collection) {
-//            if (err) {
-//                console.log('Items could not be loaded: ' + err);
-//            }
-//
-//            res.send(collection);
-//        });
-//    },
     getAllItems: function (req, res, next) {
         // GET /api/items?category=coding&title=code&orderBy=published&orderType=desc&page=1
         var title = req.query.title || '';
