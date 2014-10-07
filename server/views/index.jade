@@ -3,13 +3,16 @@ block main-content
     header.nav.navbar-inverse.navbar-fixed-top
         .container
             .navbar-header
-                a.navbar-brand(href="#/") TA Courses
+                a.navbar-brand(href="#/") Items Exchange
             .navbar-collapse.collapse
                 ul.nav.navbar-nav
                     li
-                        a(href="#/") Home
-                    li
-                        a(href="#/courses") Courses
+                        a(href="#/items") Search
+                    li(ng-show="identity.isAuthenticated()")
+                        a(href="#/myads") My Ads
+                    li(ng-show="identity.isAuthenticated()")
+                        a(href="#/inbox") Inbox
+                        
                 div(ng-include="'partials/account/login'")
 
     section
