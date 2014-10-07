@@ -45,5 +45,15 @@ module.exports = {
             res.send(item);
         });
     },
-    // add CRUD
+    deleteItem: function (req, res, next) {
+        // DELETE /api/items/{id}
+        Item.findOneAndRemove({_id: req.params.id}, function (err, item) {
+            if (err) {
+                console.log('Item not found: ' + err);
+                res.status(404).send('Item not found: ' + err);
+            }
+            
+            res.send(item);
+        });
+    },
 };

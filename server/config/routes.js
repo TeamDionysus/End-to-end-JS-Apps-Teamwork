@@ -20,10 +20,8 @@ module.exports = function (app) {
 
     app.get('/api/items', controllers.items.getAllItems);
     app.get('/api/items/:id', controllers.items.getItemById);
+    app.delete('/api/items/:id', controllers.items.deleteItem);
     // add routes for items put/post (CRUD)
-    // /api?page={page},orderBy,orderType,name  (GET)
-    // /api/items auth.isInRole('admin') (DEL)
-    // /api/items (PUT) update        
 
     //Categories
     app.get('api/categories', controllers.categories.getAllCategories);
