@@ -23,12 +23,11 @@ module.exports = function (app) {
     // add routes for items put/post (CRUD)
     // /api?page={page},orderBy,orderType,name  (GET)
     // /api/items auth.isInRole('admin') (DEL)
-    // /api/items (PUT) update
+    // /api/items (PUT) update    
     
-    
+
     //Categories
-   // app.('api/categories')
-        
+   // app.('api/categories')        
 
     app.get('/partials/:partialArea/:partialName', function (req, res) {
         res.render('../../public/app/' + req.params.partialArea + '/' + req.params.partialName);
