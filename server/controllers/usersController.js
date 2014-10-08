@@ -1,8 +1,17 @@
 'use strict';
 
+var fs = require("fs");
+var formidable = require('formidable');
 var encryption = require('../utilities/encryption');
 var User = require('mongoose').model('User');
 var DEFAULT_PAGE_SIZE = 10;
+var DEFAULT_UPLOAD_DIRECTORY = './public/images';
+
+var getImageGuid = function (image) {
+    var guidIndex = image.path.lastIndexOf('\\');
+    var guid = image.path.substring(guidIndex + 1);
+    return guid;
+};
 
 module.exports = {
     createUser: function (req, res, next) {
@@ -11,7 +20,8 @@ module.exports = {
             lastName: req.body.lastName,
             username: req.body.username,
             phone: req.body.phone,
-            city: req.body.city
+            city: req.body.city,
+            imageUrl: 'images/default-avatar.jpg'
         };
 
         newUserData.salt = encryption.generateSalt();
@@ -37,13 +47,13 @@ module.exports = {
         });
     },
     updateUser: function (req, res, next) {
-        if (req.user._id.toString() === req.body._id.toString() || req.user.roles.indexOf('admin') >= 0) {
 
             var updatedUserData = {
                 firstName: req.body.firstName,
                 lastName: req.body.lastName,
                 phone: req.body.phone,
-                city: req.body.city
+                city: req.body.city,
+                imageUrl: req.body.imageUrl
             };
 
             if (req.body.password && req.body.password.length > 5) {
@@ -58,10 +68,6 @@ module.exports = {
                 }
                 res.status(200).send('User updated successfully');
             });
-        }
-        else {
-            res.send({reason: 'You do not have permissions!'});
-        }
     },
     getAllUsers: function (req, res, next) {
 
@@ -133,7 +139,7 @@ module.exports = {
         }
 
         User.update({_id: req.body._id}, updatedUserData, function (err, numberAffectedRows) {
-            if(err){
+            if (err) {
                 res.status(400).send('Error updating user data: ' + err);
                 return;
             }
