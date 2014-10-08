@@ -20,9 +20,10 @@ module.exports = function (config) {
         console.log('Database error: ' + err);
     });
     
+    Models.Message.init();
     Models.User.init();
-	Models.Category.init();
-
+    Models.Category.init();
+    
     Models.User.seedInitialUsers();
     Models.Item.seedInitialCourses();
     Models.Category.seedCategories();

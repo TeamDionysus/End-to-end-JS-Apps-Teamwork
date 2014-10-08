@@ -16,6 +16,7 @@ module.exports.init = function () {
         city: String,
         imageUrl: String,
         items: [mongoose.model('Item').schema],
+        messages: [mongoose.model('Message').schema],
         phone: String
     });
 
