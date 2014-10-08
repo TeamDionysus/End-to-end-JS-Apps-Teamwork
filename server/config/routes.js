@@ -24,7 +24,8 @@ module.exports = function (app) {
     
     app.route('/api/items/:id')
         .get(controllers.items.getItemById)
-        .delete(controllers.items.deleteItem);
+        .delete(controllers.items.deleteItem)
+        .put(auth.isAuthenticated, controllers.items.updateItem);
     
     //Categories
     app.get('/api/categories', controllers.categories.getAllCategories);
