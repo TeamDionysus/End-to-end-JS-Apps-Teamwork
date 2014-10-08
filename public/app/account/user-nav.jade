@@ -4,6 +4,10 @@ ul.nav.navbar-nav.navbar-right(ng-controller="NavCtrl")
         a(href="#/login") Sing In
     li(ng-hide="identity.isAuthenticated()")
         a(href="#/signup") Sign Up
+    li(ng-show="identity.isAuthenticated()")
+        a(href="#/myads") My Ads
+    li(ng-show="identity.isAuthenticated()")
+        a(href="#/inbox") Inbox
 
 
 

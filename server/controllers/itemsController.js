@@ -3,7 +3,15 @@
 var fs = require("fs");
 var formidable = require('formidable');
 var Item = require('mongoose').model('Item');
+
+var DEFAULT_UPLOAD_DIRECTORY = './public/images';
 var DEFAULT_PAGE_SIZE = 10;
+
+var getImageGuid = function (image) {
+    var guidIndex = image.path.lastIndexOf('\\');
+    var guid = image.path.substring(guidIndex + 1);
+    return guid;
+};
 
 module.exports = {
     getAllItems: function (req, res, next) {
@@ -15,19 +23,19 @@ module.exports = {
         var page = Math.max(req.query.page, 1);
         
         Item.find()
-            .where({title: new RegExp(title, "i")})
-            .where({categories: new RegExp(category, "i")})
+            .where({ title: new RegExp(title, "i") })
+            .where({ categories: new RegExp(category, "i") })
             .sort(orderType + orderBy)
             .skip(DEFAULT_PAGE_SIZE * (page - 1))
             .limit(DEFAULT_PAGE_SIZE)
             //.select('_id title price')
             .exec(function (error, collection) {
-                if (error) {
-                    console.error('Error getting items: ' + error);
-                } else {
-                    res.send(collection);
-                }
-            });
+            if (error) {
+                console.error('Error getting items: ' + error);
+            } else {
+                res.send(collection);
+            }
+        });
     },
     getItemById: function (req, res, next) {
         Item.findOne({ _id: req.params.id }).exec(function (err, item) {
@@ -36,13 +44,13 @@ module.exports = {
                 console.log('Item could not be loaded: ' + err);
                 return;
             }
-
+            
             res.send(item);
         });
     },
     deleteItem: function (req, res, next) {
         // DELETE /api/items/{id}
-        Item.findOneAndRemove({_id: req.params.id}, function (err, item) {
+        Item.findOneAndRemove({ _id: req.params.id }, function (err, item) {
             if (err) {
                 console.log('Item not found: ' + err);
                 res.status(404).send('Item not found: ' + err);
@@ -53,32 +61,48 @@ module.exports = {
         });
     },
     createItem: function (req, res, next) {
+        // CREATE /api/items
+        
+        if (!fs.existsSync(DEFAULT_UPLOAD_DIRECTORY)) {
+            fs.mkdirSync(DEFAULT_UPLOAD_DIRECTORY);
+        }
+        
+        var newItem;
         var form = new formidable.IncomingForm();
+        form.encoding = 'utf-8';
+        form.uploadDir = DEFAULT_UPLOAD_DIRECTORY;
+        form.keepExtensions = true;
+        
         form.parse(req, function (err, fields, files) {
-            // TODO: upload image
+            var currentUser = req.user;
+            var imageGuid = getImageGuid(files.image);
+            
+            newItem = {
+                title: fields.title,
+                description: fields.description,
+                featured: fields.featured,
+                published: new Date(),
+                categories: fields.categories,
+                price: fields.price,
+                imageUrl: imageGuid,
+                owner: currentUser._id
+            };
         });
         
-        var currentUser = req.user;
-
-        var newItem = {
-            title: req.body.title,
-            description: req.body.description,
-            featured: req.body.featured,
-            published: new Date(),
-            categories: req.body.categories,
-            price: req.body.price,
-            imageUrl: req.body.imageUrl,
-            owner: currentUser._id
-        };
-
-        Item.create(newItem, function (err, item) { 
-            if (err) {
-                res.status(400);
-                res.send(err);
-                return;
-            }
-            
-            res.status(201).send(item);
+        form.on('error', function (err) {
+            res.status(400).send(err);
+            return;
+        });
+        
+        form.on('end', function () {
+            Item.create(newItem, function (err, item) {
+                if (err) {
+                    res.status(400).send(err);
+                    return;
+                }
+                
+                res.status(201).send(item);
+            });
         });
     }
 };

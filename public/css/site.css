@@ -1,6 +1,18 @@
 body {
   padding-top: 80px;
 }
+body .navbar-brand {
+  font-family: mistral;
+  font-size: 28px;
+}
+#logo-title {
+  font-family: mistral;
+  color: #f39;
+}
+.table tr td img {
+  width: 140px;
+  height: 140px;
+}
 .navbar-right .navbar-form input {
   margin-right: 10px;
 }

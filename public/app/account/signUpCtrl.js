@@ -4,7 +4,7 @@
 
 app.controller('SignUpCtrl', function ($scope, $location, auth, notifier) {
     $scope.signup = function (user, singUpForm) {
-        if (singUpForm.$isValid) {
+        if (singUpForm.$valid) {
 
             if (user.password === user.confirmPassword) {
 

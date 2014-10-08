@@ -3,18 +3,19 @@ block main-content
     header.nav.navbar-inverse.navbar-fixed-top
         .container
             .navbar-header
-                a.navbar-brand(href="#/") TA Courses
+                a.navbar-brand(href="#/") Items Exchange
             .navbar-collapse.collapse
                 ul.nav.navbar-nav
                     li
-                        a(href="#/") Home
-                    li
-                        a(href="#/courses") Courses
-                div(ng-include="'partials/account/user-nav'")
+                        a(href="#/items") Search
 
+                div(ng-include="'partials/account/user-nav'")
     section
         div(ng-view)
 
     footer.panel-footer
         p.text-center.text-primary
-            | &copy; Telerik Academy 2014
+            | &copy; 
+            span
+                a(href="https://github.com/TeamDionysus/End-to-end-JS-Apps-Teamwork") 
+                    | Team Dionysus 2014
