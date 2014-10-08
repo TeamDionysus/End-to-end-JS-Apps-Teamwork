@@ -1,5 +1,12 @@
-.container
-    table.table
-        tr(ng-repeat="user in users")
-            td {{ user.firstName }}
-            td {{ user.lastName }}
+.container-fluid()
+    .row
+        .col-md-3
+            div(ng-include="'partials/admin/admin-panel-navigation'")
+        .col-md-9
+            table.table
+                h3 Users
+                hr
+                .row
+                    tr(ng-repeat="user in users")
+                        td {{ user.firstName }}
+                        td {{ user.lastName }}
