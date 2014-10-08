@@ -67,7 +67,6 @@ module.exports = {
             fs.mkdirSync(DEFAULT_UPLOAD_DIRECTORY);
         }
         
-        var newItem;
         var form = new formidable.IncomingForm();
         form.encoding = 'utf-8';
         form.uploadDir = DEFAULT_UPLOAD_DIRECTORY;
@@ -75,26 +74,22 @@ module.exports = {
         
         form.parse(req, function (err, fields, files) {
             var currentUser = req.user;
-            var imageGuid = getImageGuid(files.image);
             
-            newItem = {
+            var newItem = {
                 title: fields.title,
                 description: fields.description,
                 featured: fields.featured,
                 published: new Date(),
                 categories: fields.categories,
                 price: fields.price,
-                imageUrl: imageGuid,
                 owner: currentUser._id
             };
-        });
-        
-        form.on('error', function (err) {
-            res.status(400).send(err);
-            return;
-        });
-        
-        form.on('end', function () {
+
+            if (files.image) {
+                var imageGuid = getImageGuid(files.image);
+                newItem.imageUrl = imageGuid;
+            }
+
             Item.create(newItem, function (err, item) {
                 if (err) {
                     res.status(400).send(err);
@@ -103,6 +98,66 @@ module.exports = {
                 
                 res.status(201).send(item);
             });
+        });
+        
+        form.on('error', function (err) {
+            res.status(400).send(err);
+            return;
+        });
+    },
+    updateItem : function (req, res, next) {
+        // Update /api/items/:id
+        
+        if (!fs.existsSync(DEFAULT_UPLOAD_DIRECTORY)) {
+            fs.mkdirSync(DEFAULT_UPLOAD_DIRECTORY);
+        }
+        
+        var form = new formidable.IncomingForm();
+        form.encoding = 'utf-8';
+        form.uploadDir = DEFAULT_UPLOAD_DIRECTORY;
+        form.keepExtensions = true;
+        
+        form.parse(req, function (err, fields, files) {
+            
+            Item.findOne({ _id: req.params.id }).exec(function (err, item) {
+                if (err) {
+                    res.status(400).send('Error updating item: ' + err);
+                    console.log('Error updating item: ' + err);
+                    return;
+                }
+                
+                item.title = fields.title;
+                item.description = fields.description;
+                item.featured = fields.featured;
+                item.categories = fields.categories;
+                item.price = fields.price;
+                
+                if (files.image) {
+                    // removes the old image
+                    var oldImagePath = DEFAULT_UPLOAD_DIRECTORY + '/' + item.imageUrl;
+                    if (fs.existsSync(oldImagePath)) {
+                        fs.unlink(oldImagePath);
+                    }
+                    
+                    // set the new imageUrl
+                    var newImageGuid = getImageGuid(files.image);
+                    item.imageUrl = newImageGuid;
+                }
+                
+                item.save(function (err, updatedItem, numberAffected) {
+                    if (err) {
+                        res.status(400).send('Error updating item: ' + err);
+                        return;
+                    }
+                    
+                    res.status(200).send('Item updated successfully!');
+                });
+            });
+        });
+        
+        form.on('error', function (err) {
+            res.status(400).send(err);
+            return;
         });
     }
 };

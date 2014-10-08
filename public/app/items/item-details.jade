@@ -1,5 +1,6 @@
 .container
     h2 {{ course.title }}
+    a.btn.btn-default(href="#/items/{{ currentItemId }}/edit") Edit
     p {{ course.published | date }}
     ul
         li(ng-repeat="tag in course.tags") {{ tag }}

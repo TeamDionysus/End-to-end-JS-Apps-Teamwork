@@ -24,22 +24,27 @@ app.config(function($routeProvider, $locationProvider) {
             templateUrl: '/partials/main/home',
             controller: 'MainCtrl'
         })
+        .when('/courses', {
+        templateUrl: '/partials/courses/courses-list',
+        controller: 'CoursesListCtrl'
+        })
+        .when('/courses/:id', {
+        templateUrl: '/partials/courses/course-details',
+        controller: 'CourseDetailsCtrl'
+        })
         .when('/items/create', {
             templateUrl: '/partials/items/item-create',
             controller: 'ItemCreateCtrl',
             resolve: routeUserChecks.authenticated
         })
-        .when('/courses', {
-            templateUrl: '/partials/courses/courses-list',
-            controller: 'CoursesListCtrl'
-        })
-        .when('/courses/:id', {
-            templateUrl: '/partials/courses/course-details',
-            controller: 'CourseDetailsCtrl'
-        })
         .when('/items', {
             templateUrl: '/partials/items/items-list',
             controller: 'ItemsListCtrl'
+        })
+        .when('/items/:id/edit', {
+            templateUrl: '/partials/items/item-update',
+            controller: 'ItemUpdateCtrl',
+            resolve: routeUserChecks.authenticated
         })
         .when('/items/:id', {
             templateUrl: '/partials/items/item-details',
@@ -61,11 +66,11 @@ app.config(function($routeProvider, $locationProvider) {
         });
 });
 
-app.run(function($rootScope, $location, notifier) {
+app.run(function($rootScope, $window, notifier) {
     $rootScope.$on('$routeChangeError', function(ev, current, previous, rejection) {
         if (rejection === 'not authorized') {
             notifier.error('You are not authorized!');
-            $location.path('/');
+            $window.history.back();
         }
     });
 });
