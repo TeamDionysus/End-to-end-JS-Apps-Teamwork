@@ -43,6 +43,7 @@ module.exports = function (config) {
                     var i = Math.floor(Math.random() * users.length);
                     var randomUser = users[i];
                     item.owner = randomUser._id;
+                    item.save();
                     console.log(randomUser.username + ' has ' + item.title);
                 });
             });
