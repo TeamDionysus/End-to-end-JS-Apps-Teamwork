@@ -9,9 +9,28 @@ body .navbar-brand {
   font-family: mistral;
   color: #f39;
 }
+.ratings {
+  padding-right: 10px;
+  padding-left: 10px;
+  color: #d17581;
+}
 .table tr td img {
   width: 140px;
   height: 140px;
+}
+.truncate {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.ratio {
+  position: relative;
+  width: 100%;
+  height: 0;
+  padding-bottom: 70%; /* % of width, defines aspect ratio*/
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
 }
 .navbar-right .navbar-form input {
   margin-right: 10px;

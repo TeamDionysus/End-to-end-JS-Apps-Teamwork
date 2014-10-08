@@ -7,7 +7,7 @@ var itemsSchema = mongoose.Schema({
     description: String,
     featured: Boolean,
     published: Date,
-    categories: [String],
+    category: { type: String, required: '{PATH} is required' },
     price: Number,
     imageUrl: String,
     owner : {
