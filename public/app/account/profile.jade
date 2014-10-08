@@ -3,9 +3,11 @@
         .row
             .col-md-4.col-sm-6.col-xs-12
                 .text-center
-                    img.avatar.img-thumbnail(src='http://lorempixel.com/200/200/people/9/', alt='avatar')
+                    img.avatar.img-thumbnail(ng-src='{{user.imageUrl}}', alt='avatar')
                     h6 Upload a different photo...
-                    input.text-center.center-block.well.well-sm(type='file')
+                    input.text-center.center-block.well.well-sm(type="file" data-ng-file-select="onFileSelect($files)" accept="image/png, image/jpeg")
+                    span(data-ng-if="uploadInProgress")
+                        | Upload progress: {{ uploadProgress }}
             .col-md-8.col-sm-6.col-xs-12.personal-info
                 h3 Personal info
                 form.form-horizontal(role='form')
