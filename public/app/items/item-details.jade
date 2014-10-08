@@ -14,5 +14,7 @@
     .row
         .col-md-4.pull-right.well
             strong City: {{item.owner.city}}
-            p Contact: {{item.owner.phone}}
+            p 
+                strong Contact:
+                | {{item.owner.phone}}
             button.btn.btn-info Send message
