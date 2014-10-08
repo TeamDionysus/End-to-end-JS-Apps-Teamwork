@@ -4,13 +4,12 @@ var Category = require('mongoose').model('Category');
 
 module.exports = {
     getAllCategories: function (req, res, next) {
-        Category.find({}).exec(function (err, collection) {
+        Category.find({}).sort('name').exec(function (err, collection) {
             if (err) {
                 console.log('Categories could not be loaded: ' + err);
             }
             
             res.send(collection);
-            //may be calling next()
         });
     },
     getCategoryById: function (req, res, next) {

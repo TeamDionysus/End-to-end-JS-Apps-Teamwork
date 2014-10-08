@@ -7,7 +7,7 @@ app.factory('itemsData', function ($http, $q) {
         formData.append('title', item.title);
         formData.append('description', item.description);
         formData.append('price', item.price);
-        formData.append('categories', item.categories);
+        formData.append('category', item.category);
         formData.append('image', item.image);
 
         return formData;
