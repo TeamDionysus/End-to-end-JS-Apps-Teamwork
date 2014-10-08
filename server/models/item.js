@@ -18,7 +18,7 @@ var itemsSchema = mongoose.Schema({
 
 var Item = mongoose.model('Item', itemsSchema);
 
-module.exports.seedInitialCourses = function(callback) {
+module.exports.seedInitialItems = function(callback) {
     
     if (!process.env.NODE_ENV) {
         
