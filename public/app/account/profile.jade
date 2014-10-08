@@ -1,20 +1,45 @@
 .container
-    .well
-        form.form-horizontal(name="profileForm")
-            fieldset
-                legend Create New User
-                .form-group
-                    label.col-md-2.control-label(for="first-name") First Name
-                    .col-md-10
-                        input.form-control(type="text", placeholder="First Name", ng-model="user.firstName", required)
-                .form-group
-                    label.col-md-2.control-label(for="last-name") Last Name
-                    .col-md-10
-                        input.form-control(type="text", placeholder="Last Name", ng-model="user.lastName", required)
-                .form-group
-                    label.col-md-2.control-label(for="password") Password
-                    .col-md-10
-                        input.form-control(type="password", placeholder="Password", ng-model="user.password")
-                .pull-right
-                    button.btn.btn-primary(ng-click="update(user)", ng-disabled="profileForm.$invalid") Update
-                    a.btn.btn-primary(href="#/") Cancel
+        h1.page-header Edit Profile
+        .row
+            .col-md-4.col-sm-6.col-xs-12
+                .text-center
+                    img.avatar.img-thumbnail(src='http://lorempixel.com/200/200/people/9/', alt='avatar')
+                    h6 Upload a different photo...
+                    input.text-center.center-block.well.well-sm(type='file')
+            .col-md-8.col-sm-6.col-xs-12.personal-info
+                h3 Personal info
+                form.form-horizontal(role='form')
+                    .form-group
+                        label.col-lg-3.control-label First name:
+                        .col-lg-8
+                            input.form-control(ng-model='user.firstName', type='text')
+                    .form-group
+                        label.col-lg-3.control-label Last name:
+                        .col-lg-8
+                            input.form-control(ng-model='user.lastName', type='text')
+                    .form-group
+                        label.col-lg-3.control-label City:
+                        .col-lg-8
+                            input.form-control(ng-model='user.city', type='text')
+                    .form-group
+                        label.col-lg-3.control-label Phone:
+                        .col-lg-8
+                            input.form-control(ng-model='user.phone', type='text')
+                    .form-group
+                        label.col-md-3.control-label Username:
+                        .col-md-8
+                            input.form-control(ng-model='user.username', disabled , type='text')
+                    .form-group
+                        label.col-md-3.control-label Password:
+                        .col-md-8
+                            input.form-control(ng-model='user.password', type='password')
+                    .form-group
+                        label.col-md-3.control-label Confirm password:
+                        .col-md-8
+                            input.form-control(ng-model='user.confirmPassword', type='password')
+                    .form-group
+                        label.col-md-3.control-label
+                        .col-md-8
+                            button.btn.btn-primary(ng-click='update(user)') Update
+                            span
+                            a.btn.btn-default(href='#/', type='reset') Cancel
