@@ -18,13 +18,24 @@
                     option(value="title") Title
         
     br
-    table.table
-        tr
-            th Title
-            th Price
-            th Published
-        tr(ng-repeat="item in items | orderBy: sort")
-            td
-                a(href="#/items/{{ item._id }}") {{ item.title }}
-            td {{ item.price | currency }}
-            td {{ item.published | date }}
+
+    .row
+        .col-md-9
+            .row
+              .col-sm-4.col-lg-4.col-md-4(ng-repeat="item in items | orderBy: sort")
+                .thumbnail
+                  img(src="{{ item.imageUrl }}", alt='')
+                  .caption
+                    h4.pull-right ${{ item.price }}
+                    h4
+                      a(href='#') {{ item.title }}
+                    p {{ item.description }}
+                  .ratings
+                    p.pull-right 15 reviews
+                    p
+                      span.glyphicon.glyphicon-star
+                      span.glyphicon.glyphicon-star
+                      span.glyphicon.glyphicon-star
+                      span.glyphicon.glyphicon-star
+                      span.glyphicon.glyphicon-star
+            
