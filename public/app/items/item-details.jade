@@ -4,13 +4,14 @@
             h2 {{item.title}}
             .thumbnail
                   img(src="images/{{ item.imageUrl }}", alt="{{ item.title }}")
+            p {{item.description}}
         .col-md-4.pull-right.well
             h3 {{item.price}}$
     .row
         .col-md-4.pull-right.well
             p 
                 strong Published on: 
-                | {{item.published}}
+                | {{item.published | date: 'MMM dd, yyyy'}} 
     .row
         .col-md-4.pull-right.well
             strong City: {{item.owner.city}}
