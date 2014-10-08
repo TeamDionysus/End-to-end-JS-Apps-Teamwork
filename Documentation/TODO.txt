@@ -8,6 +8,8 @@
 - "/items/{id}" - да се вижда на кого е да има линк към неговите обяви "/user/:id/items"
 - "/item/:id/edit" (логнат потребител да може да редактира своите обяви)
 
+- да изтрием courses папки, контролери, ресурси и т.н.
+
 - Messages:
 	- да се направят модели и контролери за message на сървъра
 	- "/user/send" - логнат потребител за праща съобщения
@@ -16,6 +18,7 @@
 
 - error handling and data validation to avoid crashes when invalid data is entered
 - Unit Tests
+- да го качим в Heroku (с подходящо име и лого)
 
 
 

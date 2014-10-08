@@ -1,0 +1,56 @@
+[
+  { "city" : "Sofia",
+    "firstName" : "admin",
+    "lastName" : "admin",
+    "roles" : [ "admin" ],
+    "username" : "admin"
+  },
+  { "city" : "Sofia",
+    "firstName" : "Ivaylo",
+    "lastName" : "Kenov",
+    "roles" : [ "admin" ],
+    "username" : "ivaylo.kenov"
+  },
+  { "city" : "Sofia",
+    "firstName" : "Nikolay",
+    "lastName" : "Kostov",
+    "roles" : [ "admin" ],
+    "username" : "Nikolay.IT"
+  },
+  { "city" : "Sofia",
+    "firstName" : "Doncho",
+    "lastName" : "Minkov",
+    "roles" : [ "admin" ],
+    "username" : "Doncho"
+  },
+  { "city" : "Sofia",
+    "firstName" : "Ivan",
+    "lastName" : "Ivanov",
+    "phone" : "0885-123-456",
+    "username" : "user001"
+  },
+  { "city" : "Plovdiv",
+    "firstName" : "Petar",
+    "lastName" : "Petrov",
+    "phone" : "0886-123-456",
+    "username" : "user002"
+  },
+  { "city" : "Varna",
+    "firstName" : "Georgi",
+    "lastName" : "Georgiev",
+    "phone" : "0887-123-456",
+    "username" : "user003"
+  },
+  { "city" : "Sofia",
+    "firstName" : "Stefan",
+    "lastName" : "Stefanov",
+    "phone" : "0888-123-456",
+    "username" : "user004"
+  },
+  { "city" : "Sofia",
+    "firstName" : "Martin",
+    "lastName" : "Martinov",
+    "phone" : "0889-123-456",
+    "username" : "user005"
+  }
+]

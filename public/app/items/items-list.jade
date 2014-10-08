@@ -29,8 +29,9 @@
             .row
               .col-sm-4.col-lg-4.col-md-4(ng-repeat="item in items | orderBy: sort")                
                 .thumbnail
-                  .ratio(style="background-image:url('images/{{ item.imageUrl }}')" ng-if="item.imageUrl")
-                  .ratio(style="background-image:url('images/default.jpg')" ng-if="!item.imageUrl")
+                  a(href='#/items/{{item._id}}' title="{{ item.title }}")                    
+                    .ratio(style="background-image:url('images/{{ item.imageUrl }}')" ng-if="item.imageUrl")
+                    .ratio(style="background-image:url('images/default.jpg')" ng-if="!item.imageUrl")
                   .caption
                     h4.price-tag.pull-right ${{ item.price }}
                     h4.truncate
