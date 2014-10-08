@@ -1,1 +1,1 @@
-<div class="container"><table class="table"><tr ng-repeat="user in users"><td>{{ user.firstName }}</td><td>{{ user.lastName }}</td></tr></table></div>
+<div class="container-fluid"><div class="row"><div class="col-md-3"><div ng-include="'partials/admin/admin-panel-navigation'"></div></div><div class="col-md-9"><table class="table"><h3>Users</h3><hr/><div class="row"><tr ng-repeat="user in users"><td>{{ user.firstName }}</td><td>{{ user.lastName }}</td></tr></div></table></div></div></div>
