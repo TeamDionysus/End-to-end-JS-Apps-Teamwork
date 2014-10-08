@@ -1,8 +1,9 @@
 ﻿'use strict';
 
-app.controller('ItemUpdateCtrl', function ($scope, $routeParams, $location, itemsData, notifier) {
+app.controller('ItemUpdateCtrl', function ($scope, $routeParams, $location, itemsData, CategoryResource, notifier) {
     
     $scope.currentItemId = $routeParams.id;
+    $scope.categories = CategoryResource.get();
 
     itemsData.getById($scope.currentItemId).then(function (data) {
         $scope.item = data;

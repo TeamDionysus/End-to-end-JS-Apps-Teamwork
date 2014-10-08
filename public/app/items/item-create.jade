@@ -13,7 +13,7 @@
             .form-group
                 label.col-md-2.control-label(for="categories") Categories
                 .col-md-10
-                    select#categories.form-control(ng-model="item.categories", multiple="multiple")
+                    select#categories.form-control(ng-model="item.category", required)
                         option(ng-repeat="category in categories", value="{{category.name}}") {{category.name}}
             .form-group
                 label.col-md-2.control-label(for="price") Price

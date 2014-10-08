@@ -24,7 +24,7 @@ module.exports = {
         
         Item.find()
             .where({ title: new RegExp(title, "i") })
-            .where({ categories: new RegExp(category, "i") })
+            .where({ category: new RegExp(category, "i") })
             .sort(orderType + orderBy)
             .skip(DEFAULT_PAGE_SIZE * (page - 1))
             .limit(DEFAULT_PAGE_SIZE)
@@ -80,16 +80,16 @@ module.exports = {
                 description: fields.description,
                 featured: fields.featured,
                 published: new Date(),
-                categories: fields.categories,
+                category: fields.category,
                 price: fields.price,
                 owner: currentUser._id
             };
-
+            
             if (files.image) {
                 var imageGuid = getImageGuid(files.image);
                 newItem.imageUrl = imageGuid;
             }
-
+            
             Item.create(newItem, function (err, item) {
                 if (err) {
                     res.status(400).send(err);
@@ -129,7 +129,7 @@ module.exports = {
                 item.title = fields.title;
                 item.description = fields.description;
                 item.featured = fields.featured;
-                item.categories = fields.categories;
+                item.category = fields.category;
                 item.price = fields.price;
                 
                 if (files.image) {

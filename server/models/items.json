@@ -1,5 +1,5 @@
 [
-  { "categories" : [ "Computers" ],
+  { "category" :  "Computers",
     "featured" : true,
     "imageUrl" : "MacBook_Air_13-inch_35330106_01_620x433.jpg",
     "price" : 890,
@@ -7,7 +7,7 @@
     "published" : "2014-08-29T00:00:00.000Z",
     "title" : "MacBook Air 13\""
   },
-  { "categories" : [ "Sports" ],
+  { "category" :  "Sports",
     "featured" : false,
     "imageUrl" : "s1600_92037130_1261063239.jpg",
     "price" : 150,
@@ -15,7 +15,7 @@
     "published" : "2014-08-28T00:00:00.000Z",
     "title" : "BMX Bycicle"
   },
-  { "categories" : [ "Car-parts" ],
+  { "category" :  "Car-parts",
     "featured" : false,
     "imageUrl" : "$_20.JPG",
     "price" : 180,
@@ -23,7 +23,7 @@
     "published" : "2014-08-27T00:00:00.000Z",
     "title" : "Winter tyres"
   },
-  { "categories" : [ "Watches" ],
+  { "category" :  "Watches",
     "featured" : false,
     "imageUrl" : "SNL001P-3.jpg",
     "price" : 400,
@@ -31,7 +31,7 @@
     "published" : "2014-08-26T00:00:00.000Z",
     "title" : "Seiko Kinnetic 2K"
   },
-  { "categories" : [ "Furniture" ],
+  { "category" :  "Furniture",
     "featured" : false,
     "imageUrl" : "Spherical-Luxury-Lamp001.jpg",
     "price" : 75,
@@ -39,7 +39,7 @@
     "published" : "2014-08-25T00:00:00.000Z",
     "title" : "Luxury Lamp"
   },
-  { "categories" : [ "Baby-gear" ],
+  { "category" :  "Baby-gear",
     "featured" : true,
     "imageUrl" : "4moms-Origami-Stroller.jpg",
     "price" : 380,
@@ -47,7 +47,7 @@
     "published" : "2014-08-16T00:00:00.000Z",
     "title" : "Baby stroller"
   },
-  { "categories" : [ "Phones" ],
+  { "category" :  "Phones",
     "featured" : true,
     "imageUrl" : "iPhone-5-White-Design.jpg",
     "price" : 300,
@@ -55,7 +55,7 @@
     "published" : "2014-08-23T00:00:00.000Z",
     "title" : "iPhone 5S like new"
   },
-  { "categories" : [ "Art" ],
+  { "category" :  "Art",
     "featured" : true,
     "imageUrl" : "monet001.jpg",
     "price" : 500,
@@ -63,7 +63,7 @@
     "published" : "2014-08-24T00:00:00.000Z",
     "title" : "Monet reproduction"
   },
-  { "categories" : [ "Books" ],
+  { "category" :  "Books",
     "featured" : true,
     "imageUrl" : "britannica001.jpg",
     "price" : 30,
@@ -71,7 +71,7 @@
     "published" : "2014-08-22T00:00:00.000Z",
     "title" : "Encyclopedia Britannica"
   },
-  { "categories" : [ "Cameras" ],
+  { "category" :  "Cameras",
     "featured" : true,
     "imageUrl" : "canon600D_001.jpg",
     "price" : 500,
@@ -79,7 +79,7 @@
     "published" : "2014-08-21T00:00:00.000Z",
     "title" : "Canon 600D"
   },
-  { "categories" : [ "Music" ],
+  { "category" :  "Music",
     "featured" : true,
     "imageUrl" : "mixtape001.jpg",   
     "price" : 50,
@@ -87,7 +87,7 @@
     "published" : "2014-08-20T00:00:00.000Z",
     "title" : "Awesome Mix Tape"
   },
-  { "categories" : [ "Clothing" ],
+  { "category" :  "Clothing",
     "featured" : true,
     "price" : 200,
     "imageUrl" : "top-gun-jacket-001.jpg",
@@ -95,7 +95,7 @@
     "published" : "2014-08-20T00:00:00.000Z",
     "title" : "Top Gun Jacket"
   },
-  { "categories" : [ "Toys" ],
+  { "category" :  "Toys",
     "featured" : false,
     "imageUrl" : "woody-toy-box.jpg",
     "price" : 20,
@@ -103,7 +103,7 @@
     "published" : "2014-08-19T00:00:00.000Z",
     "title" : "Woody"
   },
-  { "categories" : [ "Computers" ],
+  { "category" :  "Computers",
     "featured" : true,
     "imageUrl" : "sony-pro-5.jpg",   
     "price" : 1430,
@@ -111,7 +111,7 @@
     "published" : "2014-08-18T00:00:00.000Z",
     "title" : "Sony Vaio"
   },
-  { "categories" : [ "Misc" ],
+  { "category" :  "Misc",
     "featured" : true,
     "imageUrl" : "Wilson-nSix-One-Tour-90.jpg",  
     "price" : 90,
