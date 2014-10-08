@@ -32,6 +32,11 @@ module.exports = function (app) {
     app.get('/api/categories/:id', controllers.categories.getCategoryById);
     app.post('/api/categories', controllers.categories.createCategory);
     
+    //Messages
+    app.get('/api/messages', controllers.messages.getAllMesssages);
+    app.get('/api/messages/:id', controllers.messages.getMessageById);
+    app.post('/api/messages/send/:id', controllers.messages.sendMessage);
+    
     app.get('/partials/:partialArea/:partialName', function (req, res) {
         res.render('../../public/app/' + req.params.partialArea + '/' + req.params.partialName);
     });
