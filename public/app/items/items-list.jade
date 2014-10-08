@@ -27,14 +27,14 @@
 
         .col-md-9
             .row
-              .col-sm-4.col-lg-4.col-md-4(ng-repeat="item in items | orderBy: sort")
+              .col-sm-4.col-lg-4.col-md-4(ng-repeat="item in items | orderBy: sort")                
                 .thumbnail
-                  img(src="images/{{ item.imageUrl }}", alt="{{ item.title }}")
+                  .ratio(style="background-image:url('images/{{ item.imageUrl }}')")                  
                   .caption
-                    h4.pull-right ${{ item.price }}
-                    h4
+                    h4.price-tag.pull-right ${{ item.price }}
+                    h4.truncate
                       a(href='#/items/{{item._id}}') {{ item.title }}
-                    p {{ item.description }}
+                    p.truncate {{ item.description }}
                   .ratings
                     p.pull-right 15 reviews
                     p
