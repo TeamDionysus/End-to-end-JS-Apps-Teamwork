@@ -2,15 +2,21 @@
 
 app.factory('itemsData', function ($http, $q) {
     
+    var getItemFormData = function (item) {
+        var formData = new FormData();
+        formData.append('title', item.title);
+        formData.append('description', item.description);
+        formData.append('price', item.price);
+        formData.append('categories', item.categories);
+        formData.append('image', item.image);
+
+        return formData;
+    };
+
     var createItem = function (newItem) {
         var deferred = $q.defer();
 
-        var formData = new FormData();
-        formData.append('title', newItem.title);
-        formData.append('description', newItem.description);
-        formData.append('price', newItem.price);
-        formData.append('categories', newItem.categories);
-        formData.append('image', newItem.image);
+        var formData = getItemFormData(newItem);
         
         $http.post('/api/items', formData, {
                     transformRequest: angular.identity,
@@ -27,6 +33,26 @@ app.factory('itemsData', function ($http, $q) {
         return deferred.promise;
     };
     
+    var updateItem = function (id, updatedItem) {
+        var deferred = $q.defer();
+        
+        var formData = getItemFormData(updatedItem);
+        
+        $http.put('/api/items/' + id, formData, {
+                    transformRequest: angular.identity,
+                    headers: { 'Content-Type': undefined }
+                }
+            )
+            .success(function (item) {
+                deferred.resolve(item);
+            })
+            .error(function (error) {
+                deferred.reject(error);
+            });
+        
+        return deferred.promise;
+    };
+
     var getItems = function(query) {
         var deferred = $q.defer();
         
@@ -59,6 +85,7 @@ app.factory('itemsData', function ($http, $q) {
     
     return {
         create: createItem,
+        update: updateItem,
         getItems: getItems,
         getById: getById
     }

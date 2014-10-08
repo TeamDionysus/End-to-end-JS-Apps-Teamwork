@@ -1,6 +1,7 @@
 .container 
    .row
         .col-md-4
+            a.btn.btn-default.pull-right(href="#/items/{{ currentItemId }}/edit") Edit
             h2 {{item.title}}
             .thumbnail
                   img(src="images/{{ item.imageUrl }}", alt="{{ item.title }}")
