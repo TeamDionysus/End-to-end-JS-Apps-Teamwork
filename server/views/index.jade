@@ -8,13 +8,8 @@ block main-content
                 ul.nav.navbar-nav
                     li
                         a(href="#/items") Search
-                    li(ng-show="identity.isAuthenticated()")
-                        a(href="#/myads") My Ads
-                    li(ng-show="identity.isAuthenticated()")
-                        a(href="#/inbox") Inbox
-                        
-                div(ng-include="'partials/account/login'")
 
+                div(ng-include="'partials/account/user-nav'")
     section
         div(ng-view)
 

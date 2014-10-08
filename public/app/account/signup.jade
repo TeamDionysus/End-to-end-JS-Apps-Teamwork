@@ -1,24 +1,43 @@
 .container
-    .well
-        form.form-horizontal(name="signUpForm")
-            fieldset
-                legend Create New User
+    .row
+        .col-xs-12.col-sm-8.col-md-6.col-sm-offset-2.col-md-offset-3.well
+            form(name='singUpForm')
+                h2
+                    | Please Sign Up
+                    small It's free and always will be.
+                hr
+                .row
+                    .col-xs-6.col-sm-6.col-md-6
+                        .form-group
+                            input.form-control.input-lg(type='text', ng-model='user.firstName', placeholder='First Name', required="", tabindex='1')
+                    .col-xs-6.col-sm-6.col-md-6
+                        .form-group
+                            input.form-control.input-lg(type='text', ng-model='user.lastName', placeholder='Last Name', required="", tabindex='2')
                 .form-group
-                    label.col-md-2.control-label(for="first-name") First Name
-                    .col-md-10
-                        input.form-control(type="text", placeholder="First Name", ng-model="user.firstName", required)
+                    input.form-control.input-lg(type='text', ng-model='user.username', placeholder='Username' required="", tabindex='3')
                 .form-group
-                    label.col-md-2.control-label(for="last-name") Last Name
-                    .col-md-10
-                        input.form-control(type="text", placeholder="Last Name", ng-model="user.lastName", required)
+                    input.form-control.input-lg(type='text', ng-model="user.city", placeholder='City', tabindex='4', required="")
                 .form-group
-                    label.col-md-2.control-label(for="username") Username
-                    .col-md-10
-                        input.form-control(type="text", placeholder="Username", ng-model="user.username", required)
-                .form-group
-                    label.col-md-2.control-label(for="password") Password
-                    .col-md-10
-                        input.form-control(type="password", placeholder="Password", ng-model="user.password", required)
-                .pull-right
-                    button.btn.btn-primary(ng-click="signup(user)", ng-disabled="signUpForm.$invalid") Create
-                    a.btn.btn-primary(href="#/") Cancel
+                    input.form-control.input-lg(type='text', ng-model="user.phone", placeholder='(+359) 888 888 888', tabindex='5', required="")
+                .row
+                    .col-xs-6.col-sm-6.col-md-6
+                        .form-group
+                            input.form-control.input-lg(type='password', ng-model="user.password" ng-minlength="4" ng-maxlength="20" required="", placeholder='Password', tabindex='6')
+                    .col-xs-6.col-sm-6.col-md-6
+                        .form-group
+                            input.form-control.input-lg(type='password', ng-model="user.confirmPassword" ng-minlength="4" ng-maxlength="20" required="", placeholder='Confirm Password', tabindex='7')
+                .row
+                    .col-xs-3.col-sm-3.col-md-3
+
+                    .col-xs-9.col-sm-9.col-md-9
+                        | By clicking
+                        strong.label.label-primary Register
+                        | , you agree to the
+                        a(href='') Terms and Conditions
+                        | set out by this site, including our Cookie Use.
+                hr
+                .row
+                    .col-xs-6.col-md-6
+                        button.btn.btn-primary.btn-block.btn-lg(ng-click="signup(user, singUpForm)") Register
+                    .col-xs-6.col-md-6
+                        a.btn.btn-success.btn-block.btn-lg(href='#/login') Sign In

@@ -3,7 +3,7 @@
 'use strict';
 
 app.controller('ItemCreateCtrl', function ($scope, $location, itemsData, notifier) {
-    
+
     $scope.submit = function (formData) {
 
         itemsData.create(formData).then(

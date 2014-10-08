@@ -4,8 +4,14 @@ var fs = require("fs");
 var formidable = require('formidable');
 var Item = require('mongoose').model('Item');
 
-var DEFAULT_UPLOAD_DIRECTORY = './images';
+var DEFAULT_UPLOAD_DIRECTORY = './public/images';
 var DEFAULT_PAGE_SIZE = 10;
+
+var getImageGuid = function (image) {
+    var guidIndex = image.path.lastIndexOf('\\');
+    var guid = image.path.substring(guidIndex + 1);
+    return guid;
+};
 
 module.exports = {
     getAllItems: function (req, res, next) {
@@ -55,7 +61,8 @@ module.exports = {
         });
     },
     createItem: function (req, res, next) {
-
+        // CREATE /api/items
+        
         if (!fs.existsSync(DEFAULT_UPLOAD_DIRECTORY)) {
             fs.mkdirSync(DEFAULT_UPLOAD_DIRECTORY);
         }
@@ -65,10 +72,11 @@ module.exports = {
         form.encoding = 'utf-8';
         form.uploadDir = DEFAULT_UPLOAD_DIRECTORY;
         form.keepExtensions = true;
-
+        
         form.parse(req, function (err, fields, files) {
             var currentUser = req.user;
-
+            var imageGuid = getImageGuid(files.image);
+            
             newItem = {
                 title: fields.title,
                 description: fields.description,
@@ -76,7 +84,7 @@ module.exports = {
                 published: new Date(),
                 categories: fields.categories,
                 price: fields.price,
-                imageUrl: files.image.path,
+                imageUrl: imageGuid,
                 owner: currentUser._id
             };
         });
@@ -86,7 +94,7 @@ module.exports = {
             return;
         });
         
-        form.on('end', function () {      
+        form.on('end', function () {
             Item.create(newItem, function (err, item) {
                 if (err) {
                     res.status(400).send(err);
