@@ -28,7 +28,7 @@
                   .caption
                     h4.pull-right ${{ item.price }}
                     h4
-                      a(href='#') {{ item.title }}
+                      a(href='#/items/{{item._id}}') {{ item.title }}
                     p {{ item.description }}
                   .ratings
                     p.pull-right 15 reviews
