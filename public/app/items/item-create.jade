@@ -22,7 +22,7 @@
             .form-group
                 label.col-md-2.control-label(for="image") Image
                 .col-md-10
-                    input#image.form-control(type="file", file-model="item.image", accept="image/*")
+                    input.form-control(type="file", file-model="item.image", accept="image/*")
             .pull-right
                 button.btn.btn-primary.btn-lg(ng-click="submit(item)", ng-disabled="createItemForm.$invalid") Add
                 a.btn.btn-danger.btn-lg(href="#/") Cancel

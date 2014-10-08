@@ -24,7 +24,7 @@
             .row
               .col-sm-4.col-lg-4.col-md-4(ng-repeat="item in items | orderBy: sort")
                 .thumbnail
-                  img(src="{{ item.imageUrl }}", alt='')
+                  img(src="images/{{ item.imageUrl }}", alt="{{ item.title }}")
                   .caption
                     h4.pull-right ${{ item.price }}
                     h4
