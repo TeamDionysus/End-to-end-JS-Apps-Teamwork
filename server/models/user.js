@@ -29,32 +29,35 @@ module.exports.init = function () {
     User = mongoose.model('User', userSchema);
 };
 
-module.exports.seedInitialUsers = function() {    
+function addPassword(user) {
+    // Password is the same as the username
+    var salt = encryption.generateSalt();
+    var hashedPwd = encryption.generateHashedPassword(salt, user.username);
+    user.salt = salt;
+    user.hashPass = hashedPwd;
+}
 
-    User.find({}).exec(function(err, collection) {
-        if (err) {
-            console.log('Cannot find users: ' + err);
-            return;
-        }
-
-        if (collection.length === 0) {
-            var salt;
-            var hashedPwd;
-
-            salt = encryption.generateSalt();
-            hashedPwd = encryption.generateHashedPassword(salt, 'Ivaylo');
-            User.create({username: 'ivaylo.kenov', firstName: 'Ivaylo', lastName: 'Kenov', salt: salt, hashPass: hashedPwd, roles: ['admin']});
-            salt = encryption.generateSalt();
-            hashedPwd = encryption.generateHashedPassword(salt, 'Nikolay');
-            User.create({username: 'Nikolay.IT', firstName: 'Nikolay', lastName: 'Kostov', salt: salt, hashPass: hashedPwd, roles: ['standard']});
-            salt = encryption.generateSalt();
-            hashedPwd = encryption.generateHashedPassword(salt, 'Doncho');
-            User.create({username: 'Doncho', firstName: 'Doncho', lastName: 'Minkov', salt: salt, hashPass: hashedPwd});
-            salt = encryption.generateSalt();
-            hashedPwd = encryption.generateHashedPassword(salt, 'admin');
-            User.create({username: 'admin', firstName: 'Administrator', lastName: 'Administrator', salt: salt, hashPass: hashedPwd, roles: ['admin']});
-
-            console.log('Users added to database...');
-        }
-    });
+module.exports.seedInitialUsers = function(callback) {
+    
+    if (!process.env.NODE_ENV) {
+        
+        User.remove({}, function (err) {
+            if (err) return console.log(err);            
+            
+            var users = require('./users.json');
+            users.forEach(function (user) {
+                addPassword(user);
+            });
+            
+            User.create(users, function (err) {
+                if (err) return console.log(err);
+                
+                console.log('Database seeded with users...');
+                
+                if (typeof(callback) === "function") {
+                    callback();
+                }
+            });
+        });  
+    }
 };

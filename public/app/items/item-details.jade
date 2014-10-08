@@ -8,15 +8,24 @@
             p {{item.description}}
         .col-md-4.pull-right.well
             h3 {{item.price}}$
+            br
+            strong Published on: 
+            | {{item.published | date: 'MMM dd, yyyy'}} 
     .row
         .col-md-4.pull-right.well
-            p 
-                strong Published on: 
-                | {{item.published | date: 'MMM dd, yyyy'}} 
-    .row
-        .col-md-4.pull-right.well
-            strong City: {{item.owner.city}}
-            p 
-                strong Contact:
+            div
+                strong User: 
+                | {{item.owner.firstName + ' ' + item.owner.lastName}}
+            br
+            div
+                strong City: 
+                | {{item.owner.city}}
+                
+            br   
+            div
+                strong Contact: 
                 | {{item.owner.phone}}
-            button.btn.btn-info Send message
+            br   
+            div
+                button.btn.btn-info Send message
+            

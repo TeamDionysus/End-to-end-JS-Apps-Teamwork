@@ -18,16 +18,22 @@ var itemsSchema = mongoose.Schema({
 
 var Item = mongoose.model('Item', itemsSchema);
 
-module.exports.seedInitialCourses = function() {
+module.exports.seedInitialItems = function(callback) {
     
     if (!process.env.NODE_ENV) {
         
-        Item.remove({}, function (error) {
-            if (error) return console.log(error);
+        Item.remove({}, function (err) {
+            if (err) return console.log(err);
             
-            console.log('Database seeded with items...')
-            
-            Item.create(require('./items.json'));
+            Item.create(require('./items.json'), function (err) {
+                if (err) return console.log(err);
+                
+                console.log('Database seeded with items...');
+                
+                if (typeof(callback) === "function") {
+                    callback();
+                }
+            });
         });    
     }
 };

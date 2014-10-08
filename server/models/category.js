@@ -11,29 +11,23 @@ module.exports.init = function () {
     Category = mongoose.model('Category', categorySchema);
 };
 
-module.exports.seedCategories = function() {
+module.exports.seedCategories = function(callback) {
     if (!process.env.NODE_ENV) {
         
-        Category.remove({}, function (error) {
-            if (error) return console.log(error);
-
-            console.log('Database seeded with categories...')
-            Category.create([
-                {name: 'Computers'},
-                {name: 'Cameras'},
-                {name: 'Phones'},
-                {name: 'Sports'},
-                {name: 'Furniture'},
-                {name: 'Art'},
-                {name: 'Books'},
-                {name: 'Music'},
-                {name: 'Clothing'},
-                {name: 'Watches'},
-                {name: 'Toys'},
-                {name: 'Car-parts'},
-                {name: 'Baby-gear'},
-                {name: 'Misc'}
-            ]); 
+        Category.remove({}, function (err) {
+            if (err) return console.log(err);
+            
+            var categories = require('./categories.json');
+            
+            Category.create(categories, function (err) {  
+                if (err) return console.log(err);
+                
+                console.log('Database seeded with categories...');
+                
+                if (typeof(callback) === "function") {
+                    callback();
+                }
+            }); 
         });    
     }
 };
