@@ -9,10 +9,12 @@ module.exports = function (app) {
         .post(controllers.users.createUser)
         .put(auth.isAuthenticated, controllers.users.updateUser);
 
-        app.route('/api/users/:id')
-            .get(controllers.users.getById)
-            .post( auth.isInRole('admin'), controllers.users.updateByAdmin)
-            .delete( auth.isInRole('admin'), controllers.users.deleteUser);
+    app.get('/api/users/:id/items', controllers.items.getByUserId);
+
+    app.route('/api/users/:id')
+        .get(controllers.users.getById)
+        .post( auth.isInRole('admin'), controllers.users.updateByAdmin)
+        .delete( auth.isInRole('admin'), controllers.users.deleteUser);
     //.put(auth.isAuthenticated(), controllers.users.voteForUser)
 
     app.post('/login', auth.login);
