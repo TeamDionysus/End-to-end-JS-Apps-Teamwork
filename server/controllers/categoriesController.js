@@ -10,7 +10,7 @@ module.exports = {
             }
             
             res.send(collection);
-            //may be calling next()
+            
         });
     },
     getCategoryById: function (req, res, next) {
