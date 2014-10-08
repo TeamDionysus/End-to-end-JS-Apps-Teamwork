@@ -24,12 +24,13 @@ module.exports = function (app) {
     
     app.route('/api/items/:id')
         .get(controllers.items.getItemById)
-        .delete(controllers.items.deleteItem);
+        .delete(controllers.items.deleteItem)
+        .put(auth.isAuthenticated, controllers.items.updateItem);
     
     //Categories
-    app.get('api/categories', controllers.categories.getAllCategories);
-    app.get('api/categories/:id', controllers.categories.getCategoryById);
-    app.post('api/categories', controllers.categories.createCategory);
+    app.get('/api/categories', controllers.categories.getAllCategories);
+    app.get('/api/categories/:id', controllers.categories.getCategoryById);
+    app.post('/api/categories', controllers.categories.createCategory);
     
     app.get('/partials/:partialArea/:partialName', function (req, res) {
         res.render('../../public/app/' + req.params.partialArea + '/' + req.params.partialName);

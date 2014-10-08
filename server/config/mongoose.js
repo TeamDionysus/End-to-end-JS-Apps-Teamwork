@@ -25,4 +25,5 @@ module.exports = function (config) {
 
     Models.User.seedInitialUsers();
     Models.Item.seedInitialCourses();
+    Models.Category.seedCategories();
 };

@@ -2,7 +2,7 @@
 
 'use strict';
 
-app.controller('ItemsListCtrl', function($scope, $rootScope, itemsData) {
+app.controller('ItemsListCtrl', function($scope, $rootScope, itemsData, CategoryResource) {
     $scope.query = $rootScope.searchQuery || ''; 
     $scope.sort = '-published';
     findItem($scope.query);
@@ -16,4 +16,6 @@ app.controller('ItemsListCtrl', function($scope, $rootScope, itemsData) {
                 $scope.items = data;
             });        
     }
+    
+    $scope.categories = CategoryResource.get();
 });

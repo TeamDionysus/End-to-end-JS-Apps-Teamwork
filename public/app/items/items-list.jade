@@ -20,6 +20,11 @@
     br
 
     .row
+    
+        .col-md-3
+          .list-group
+            a.list-group-item(href="#" ng-repeat="category in categories | orderBy: 'name'") {{category.name}}
+
         .col-md-9
             .row
               .col-sm-4.col-lg-4.col-md-4(ng-repeat="item in items | orderBy: sort")
