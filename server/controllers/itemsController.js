@@ -84,12 +84,12 @@ module.exports = {
                 price: fields.price,
                 owner: currentUser._id
             };
-
+            
             if (files.image) {
                 var imageGuid = getImageGuid(files.image);
                 newItem.imageUrl = imageGuid;
             }
-
+            
             Item.create(newItem, function (err, item) {
                 if (err) {
                     res.status(400).send(err);

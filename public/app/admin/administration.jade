@@ -1,23 +1,5 @@
 .container-fluid(ng-controller='administrationCtrl')
-    .wrapper.row-offcanvas.row-offcanvas-left
-        aside.left-side.sidebar-offcanvas
-            .sidebar
-                ul.sidebar-menu
-                    li.active
-                       a(href='#/index')
-                           .span.fa.fa-dashboard
-                           |  Dashboard
-                    li.treeview
-                        a(href='#')
-                            i.fa.fa-table
-                            span Tables
-                            i.fa.fa-angle-left.pull-right
-                            ul.treeview-menu
-                                li
-                                    a(href='pages/tables/simple.html')
-                                        i.fa.fa-angle-double-right
-                                        | Simple tables
-                                li
-                                    a(href='pages/tables/data.html')
-                                        i.fa.fa-angle-double-right
-                                        | Data tables
+    .row
+        .col-md-3
+            div(adminPanelNavDirective)
+        .col-md-9

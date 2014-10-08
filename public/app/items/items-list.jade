@@ -3,11 +3,11 @@
         .col-md-4
             form.navbar-form(role="search")
             .input-group
-                input.form-control(type="text" placeholder="Search" name="q" ng-model="query")
+                input.form-control(type="text" placeholder="Search" name="q" ng-model="query" ng-keyup="$event.keyCode == 13 && findItem(query)")
                 .input-group-btn
                     button.btn.btn-default(ng-click="findItem(query)")
-                        i.glyphicon.glyphicon-search
-                        
+                        i.glyphicon.glyphicon-search                        
+                    
         .col-md-4
             form.navbar-form(role="search")
                 
