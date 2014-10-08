@@ -7,6 +7,6 @@ app.controller('ItemDetailsCtrl', function ($scope, $routeParams, itemsData) {
 
     itemsData.getById($scope.currentItemId)
         .then(function (data) {
-            $scope.course = data;
+            $scope.item = data;
         });
 });

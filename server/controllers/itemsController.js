@@ -19,7 +19,7 @@ module.exports = {
         var title = req.query.title || '';
         var category = req.query.category || '';
         var orderBy = req.query.orderBy || 'published';
-        var orderType = req.query.orderType === 'desc' ? '-' : '';
+        var orderType = req.query.orderType === 'asc' ? '' : '-';
         var page = Math.max(req.query.page, 1);
         
         Item.find()

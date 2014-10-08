@@ -37,6 +37,18 @@ app.config(function($routeProvider, $locationProvider) {
             controller: 'ItemCreateCtrl',
             resolve: routeUserChecks.authenticated
         })
+        .when('/courses', {
+            templateUrl: '/partials/courses/courses-list',
+            controller: 'CoursesListCtrl'
+        })
+        .when('/courses/:id', {
+            templateUrl: '/partials/courses/course-details',
+            controller: 'CourseDetailsCtrl'
+        })
+        .when('/login', {
+            templateUrl: '/partials/account/login',
+            controller: 'LoginCtrl'
+        })
         .when('/items', {
             templateUrl: '/partials/items/items-list',
             controller: 'ItemsListCtrl'
