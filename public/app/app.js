@@ -24,26 +24,10 @@ app.config(function($routeProvider, $locationProvider) {
             templateUrl: '/partials/main/home',
             controller: 'MainCtrl'
         })
-        .when('/courses', {
-        templateUrl: '/partials/courses/courses-list',
-        controller: 'CoursesListCtrl'
-        })
-        .when('/courses/:id', {
-        templateUrl: '/partials/courses/course-details',
-        controller: 'CourseDetailsCtrl'
-        })
         .when('/items/create', {
             templateUrl: '/partials/items/item-create',
             controller: 'ItemCreateCtrl',
             resolve: routeUserChecks.authenticated
-        })
-        .when('/courses', {
-            templateUrl: '/partials/courses/courses-list',
-            controller: 'CoursesListCtrl'
-        })
-        .when('/courses/:id', {
-            templateUrl: '/partials/courses/course-details',
-            controller: 'CourseDetailsCtrl'
         })
         .when('/login', {
             templateUrl: '/partials/account/login',
