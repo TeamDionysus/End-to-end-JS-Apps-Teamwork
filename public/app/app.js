@@ -55,6 +55,11 @@ app.config(function($routeProvider, $locationProvider) {
             controller: 'ProfileCtrl',
             resolve: routeUserChecks.authenticated
         })
+        .when('/settings',{
+            templateUrl: '/partials/account/user-settings',
+            controller: 'UserSettingsCtrl',
+            resolve: routeUserChecks.authenticated
+        })
         .when('/admin/users', {
             templateUrl: '/partials/admin/users-list',
             controller: 'UserListCtrl',

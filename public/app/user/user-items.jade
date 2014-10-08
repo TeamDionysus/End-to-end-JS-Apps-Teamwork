@@ -14,10 +14,10 @@
                     li.list-group-item
                         i.fa.fa-foursquare
                         span.list-group-item-text  {{user.city}}
-                    a(href='#/settings')
+                    a(href='')
                         li.list-group-item
-                            i.fa.fa-gear
-                            span.list-group-item-heading  Settings
+                            i.fa.fa-envelope
+                            span.list-group-item-heading  Send me message
         .col-md-8
             .row
                 .col-sm-4.col-lg-4.col-md-4(ng-repeat="item in user.items | orderBy: -item.published")
