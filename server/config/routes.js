@@ -36,7 +36,10 @@ module.exports = function (app) {
     app.post('/api/categories', controllers.categories.createCategory);
     
     //Messages
-    app.get('/api/messages', controllers.messages.getAllMesssages);
+    app.get('/api/messages/all', controllers.messages.getAll);
+    app.get('/api/messages/inbox', controllers.messages.getInbox);
+    app.get('/api/messages/sent', controllers.messages.getSent);
+    
     app.get('/api/messages/:id', controllers.messages.getMessageById);
     app.post('/api/messages/send/:id', controllers.messages.sendMessage);
     
