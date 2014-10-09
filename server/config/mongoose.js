@@ -24,7 +24,29 @@ module.exports = function (config) {
     Models.User.init();
     Models.Category.init();
     
-    Models.User.seedInitialUsers();
-    Models.Item.seedInitialCourses();
     Models.Category.seedCategories();
+    
+    Models.User.seedInitialUsers(function (err) {
+        Models.Item.seedInitialItems(function (err) {
+            addOwnersToItems();
+        });        
+    });
+    
+    function addOwnersToItems() {
+        mongoose.model('Item').find(function (err, items) {
+            
+            console.log('There are '+ items.length + ' items.');
+            mongoose.model('User').find({roles: { $ne: 'admin' }}, function (err, users) {
+                
+                console.log('There are '+ users.length + ' users.');
+                items.forEach(function (item) { 
+                    var i = Math.floor(Math.random() * users.length);
+                    var randomUser = users[i];
+                    item.owner = randomUser._id;
+                    item.save();
+                    console.log(randomUser.username + ' has ' + item.title);
+                });
+            });
+        });       
+    }
 };

@@ -38,15 +38,17 @@ module.exports = {
         });
     },
     getItemById: function (req, res, next) {
-        Item.findOne({ _id: req.params.id }).exec(function (err, item) {
-            if (err) {
-                res.status(400).send('Item could not be loaded: ' + err);
-                console.log('Item could not be loaded: ' + err);
-                return;
-            }
-            
-            res.send(item);
-        });
+        Item.findOne({ _id: req.params.id })
+            .populate('owner', 'username firstName lastName city phone imageUrl')    
+            .exec(function (err, item) {
+                if (err) {
+                    res.status(400).send('Item could not be loaded: ' + err);
+                    console.log('Item could not be loaded: ' + err);
+                    return;
+                }
+
+                res.send(item);
+            });
     },
     deleteItem: function (req, res, next) {
         // DELETE /api/items/{id}

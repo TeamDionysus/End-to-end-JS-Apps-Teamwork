@@ -1,0 +1,15 @@
+[ { "name" : "Computers" },
+  { "name" : "Cameras" },
+  { "name" : "Phones" },
+  { "name" : "Sports" },
+  { "name" : "Furniture" },
+  { "name" : "Art" },
+  { "name" : "Books" },
+  { "name" : "Music" },
+  { "name" : "Clothing" },
+  { "name" : "Watches" },
+  { "name" : "Toys" },
+  { "name" : "Car-parts" },
+  { "name" : "Baby-gear" },
+  { "name" : "Misc" }
+]

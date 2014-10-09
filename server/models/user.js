@@ -29,33 +29,34 @@ module.exports.init = function () {
     User = mongoose.model('User', userSchema);
 };
 
-function saveUser(user) {
+function addPassword(user) {
+    // Password is the same as the username
     var salt = encryption.generateSalt();
     var hashedPwd = encryption.generateHashedPassword(salt, user.username);
-    User.create({
-        username: user.username,
-        firstName: user.firstName,
-        lastName: user.lastName,
-        salt: salt,
-        hashPass: hashedPwd,
-        phone: user.phone,
-        city: user.city,
-        roles: user.roles || []
-    });
+    user.salt = salt;
+    user.hashPass = hashedPwd;
 }
 
-module.exports.seedInitialUsers = function() {
+module.exports.seedInitialUsers = function(callback) {
     
     if (!process.env.NODE_ENV) {
         
-        User.remove({}, function (error) {
-            if (error) return console.log(error);
-            
-            console.log('Database seeded with users...')
+        User.remove({}, function (err) {
+            if (err) return console.log(err);            
             
             var users = require('./users.json');
             users.forEach(function (user) {
-                saveUser(user);
+                addPassword(user);
+            });
+            
+            User.create(users, function (err) {
+                if (err) return console.log(err);
+                
+                console.log('Database seeded with users...');
+                
+                if (typeof(callback) === "function") {
+                    callback();
+                }
             });
         });  
     }
