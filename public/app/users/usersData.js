@@ -2,7 +2,21 @@
 
 'use strict';
 
-app.factory('usersData', function ($http, $q) {
+app.factory('usersData', function ($http, $q, identity) {
+    
+    var getUserFormData = function (user) {
+        var formData = new FormData();
+        formData.append('_id', identity.currentUser._id);
+        formData.append('username', user.username);
+        formData.append('firstName', user.firstName);
+        formData.append('lastName', user.lastName);
+        formData.append('password', user.password || '');
+        formData.append('phone', user.phone);
+        formData.append('city', user.city);
+        formData.append('image', user.image);
+       
+        return formData;
+    };
 
     function getById(id) {
         var deferred = $q.defer();
@@ -16,9 +30,30 @@ app.factory('usersData', function ($http, $q) {
             });
 
         return deferred.promise;
-    }
+    };
+
+    var updateUser = function (updatedUser) {
+        var deferred = $q.defer();
+        
+        var formData = getUserFormData(updatedUser);
+        
+        $http.put('/api/users', formData, {
+                    transformRequest: angular.identity,
+                    headers: { 'Content-Type': undefined }
+                }
+            )
+            .success(function (user) {
+                deferred.resolve(user);
+            })
+            .error(function (error) {
+                deferred.reject(error);
+            });
+        
+        return deferred.promise;
+    };
 
     return {
-        getById: getById
+        getById: getById,
+        update: updateUser
     };
 });
