@@ -23,10 +23,12 @@ function init(server) {
           socket.emit('pong', m);
         });
       });
-
-//    setInterval(function () {
-//      sio.sockets.emit('time', Date());
-//    }, 2000);
+    
+    if (!process.env.NODE_ENV) {
+            setInterval(function () {
+          sio.sockets.emit('time', Date());
+        }, 2000);
+    }
 };
 
 module.exports = {
