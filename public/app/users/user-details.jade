@@ -22,21 +22,4 @@
                             i.fa.fa-envelope
                             span.list-group-item-heading  Send message
         .col-md-8
-            .row
-                .col-sm-4.col-lg-4.col-md-4(ng-repeat="item in user.items | orderBy: -item.published")
-                    .thumbnail
-                        .ratio(style="background-image:url('images/{{ item.imageUrl }}')" ng-if="item.imageUrl")
-                        .ratio(style="background-image:url('images/default.jpg')" ng-if="!item.imageUrl")
-                        .caption
-                            h4.price-tag.pull-right ${{ item.price }}
-                            h4.truncate
-                                a(href='#/items/{{item._id}}') {{ item.title }}
-                            p.truncate {{ item.description }}
-                        .ratings
-                            p.pull-right 15 reviews
-                            p
-                                span.glyphicon.glyphicon-star
-                                span.glyphicon.glyphicon-star
-                                span.glyphicon.glyphicon-star
-                                span.glyphicon.glyphicon-star
-                                span.glyphicon.glyphicon-star
+            div(items-grid items="user.items" sort="sort")
