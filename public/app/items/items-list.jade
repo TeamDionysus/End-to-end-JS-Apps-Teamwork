@@ -22,7 +22,7 @@
     
         .col-md-3
           .list-group
-            a.list-group-item(href="#" ng-repeat="category in categories | orderBy: 'name'") {{category.name}}
+            a.list-group-item(href="#/categories/{{category.name}}" ng-repeat="category in categories | orderBy: 'name'") {{category.name}}
 
         .col-md-9
             div(data-pagination="" data-num-pages="numPages()" data-current-page="currentPage" data-max-size="maxSize" data-boundary-links="true")
