@@ -46,7 +46,6 @@
     "grunt-nodemon": "~0.3.0",
     "grunt-open": "^0.2.3",
     "load-grunt-tasks": "^0.4.0",
-    "mocha": "^1.21.4",
     "should": "^4.0.4",
     "socket.io": "^1.0.4",
     "socket.io-client": "^1.0.4"
