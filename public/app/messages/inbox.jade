@@ -2,19 +2,34 @@
     .row
         .col-md-3.col-sm-4
 
-        .col-md-9.col-sm-8
+        .col-md-9.col-sm-8.well
             ul.nav.nav-tabs
                 li.active
-                    a(href="#home" data-toggle="tab")
+                    a(href="#inbox" target="_self" data-toggle="tab")
                         span.glyphicon.glyphicon-inbox
-                        |  Primary
+                        |  Inbox
                 li
-                    a(href="#profile" data-toggle="tab")
+                    a(href="#sendByMe" target="_self" data-toggle="tab")
                         span.glyphicon.glyphicon-user
                         |  Send by me
             .tab-content
-                .tab-pane.fade.in.active#home
+                .tab-pane.fade.in.active#inbox
                     .list-group
-                        a.list-group.item(href="#")
-                            .col-md-2.col-offset-md-2 {{message.from}}
-                            .col-md-6 {{message.title}}
+                        a.list-group.item(href="#" ng-repeat="message in messages" ng-if="messages")
+                            .col-md-2  {{message.from.username}}
+                            .col-md-6  {{message.title}}
+                            .col-md-2
+                                span.badge {{message.date | date}}
+                            .col-md-2
+                                a(href="#/send/{{message.from._id}}" ng-if="message")
+                                    i.fa.fa-reply
+                                    |  Reply
+                        div(ng-hide="messages")
+                            h3 No messages
+                .tab-pane#sendByMe
+                    .list-group
+                        a.list-group.item(href="#" ng-repeat="message in messages")
+                            .col-md-2  {{message.from}}
+                            .col-md-6  {{message.title}}
+                            .col-md-2
+                                span.badge {{message.date | date}}

@@ -67,15 +67,16 @@ app.factory('itemsData', function ($http, $q) {
         return deferred.promise;
     };
 
-    var getItems = function(query, page, orderBy, category) {
+    var getItems = function(filters) {
         var deferred = $q.defer();
+
+        var query = filters.query ? '&title=' + filters.query : '';
+        var page = filters.page ? '&page=' + filters.page : '';
+        var orderBy = filters.orderBy ? '&orderBy=' + filters.orderBy : '';
+        var category = filters.category ? '&category=' + filters.category : '';
+        var isFeatured = filters.isFeatured ? '&featured=' + filters.isFeatured : '';
         
-        query = query ? '&title=' + query : '';
-        page = page ? '&page=' + page : '';
-        orderBy = orderBy ? '&orderBy=' + orderBy : '';
-        category = category ? '&category=' + category : '';
-        
-        $http.get('/api/items?' + page + query + orderBy + category)
+        $http.get('/api/items?' + page + query + orderBy + category + isFeatured)
             .success(function (items) {
             deferred.resolve(items);
         })

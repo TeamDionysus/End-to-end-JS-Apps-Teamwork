@@ -2,22 +2,36 @@
 
 'use strict';
 
-app.controller('MainCtrl', function($scope, $rootScope, $location, identity, itemsData) {
- 
-    $scope.items;
-    $scope.query;
-    $scope.getItems = function () {
-        itemsData.getItems($scope.query).then(function (res, err) {
+app.controller('MainCtrl', function ($scope, $rootScope, $location, identity, itemsData) {
+    
+    
+    $scope.filters = {
+        isFeatured: true,
+        orderBy : '-published',
+        query: ''
+    };
+    
+    $scope.num = 6;
+    
+    itemsData.getItems($scope.filters).then(function (res, err) {
+        if (err) {
+            console.log(err);
+        }
+        
+        $scope.featuredItems = res;
+        $scope.filters.isFeatured = undefined;
+
+        itemsData.getItems($scope.filters).then(function (res, err) {
             if (err) {
                 console.log(err);
             }
-   
-            $scope.items = res;
+            
+            
+            $scope.latestItems = res;
         });
-    };
+    });
     
-    $scope.data = $scope.getItems();
-
+    
     $scope.identity = identity;
     $rootScope.searchQuery = '';
     
