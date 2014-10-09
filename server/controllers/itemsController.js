@@ -18,36 +18,36 @@ module.exports = {
         // GET /api/items?category=coding&title=code&orderBy=published&orderType=desc&page=1
         var title = req.query.title || '';
         var category = req.query.category || '';
-        var orderBy = req.query.orderBy || 'published';
+        var orderBy = req.query.orderBy || '-published';
         var orderType = req.query.orderType === 'asc' ? '' : '-';
         var page = Math.max(req.query.page, 1);
-        
+
         Item.find()
             .where({ title: new RegExp(title, "i") })
             .where({ category: new RegExp(category, "i") })
-            .sort(orderType + orderBy)
+            .sort(orderBy)
             .skip(DEFAULT_PAGE_SIZE * (page - 1))
             .limit(DEFAULT_PAGE_SIZE)
             //.select('_id title price')
             .exec(function (error, collection) {
-            if (error) {
-                console.error('Error getting items: ' + error);
-            } else {
-                res.send(collection);
-            }
-        });
+                if (error) {
+                    console.error('Error getting items: ' + error);
+                } else {
+                    res.send(collection);
+                }
+            });
     },
     getByUserId: function(req, res, next){
         var title = req.query.title || '';
         var category = req.query.category || '';
         var orderBy = req.query.orderBy || 'published';
-        var orderType = req.query.orderType === 'desc' ? '' : '-';
+//        var orderType = req.query.orderType === 'desc' ? '' : '-';
         var page = Math.max(req.query.page, 1);
 
         Item.find({ owner: req.params.id })
             .where({ title: new RegExp(title, "i") })
             .where({ category: new RegExp(category, "i") })
-            .sort(orderType + orderBy)
+            .sort(orderBy)
             .skip(DEFAULT_PAGE_SIZE * (page - 1))
             .limit(DEFAULT_PAGE_SIZE)
             //.select('_id title price')
@@ -61,7 +61,7 @@ module.exports = {
     },
     getItemById: function (req, res, next) {
         Item.findOne({ _id: req.params.id })
-            .populate('owner', 'username firstName lastName city phone imageUrl')    
+            .populate('owner', 'username firstName lastName city phone imageUrl')
             .exec(function (err, item) {
                 if (err) {
                     res.status(400).send('Item could not be loaded: ' + err);
@@ -80,25 +80,25 @@ module.exports = {
                 res.status(404).send('Item not found: ' + err);
                 return;
             }
-            
+
             res.send(item);
         });
     },
     createItem: function (req, res, next) {
         // CREATE /api/items
-        
+
         if (!fs.existsSync(DEFAULT_UPLOAD_DIRECTORY)) {
             fs.mkdirSync(DEFAULT_UPLOAD_DIRECTORY);
         }
-        
+
         var form = new formidable.IncomingForm();
         form.encoding = 'utf-8';
         form.uploadDir = DEFAULT_UPLOAD_DIRECTORY;
         form.keepExtensions = true;
-        
+
         form.parse(req, function (err, fields, files) {
             var currentUser = req.user;
-            
+
             var newItem = {
                 title: fields.title,
                 description: fields.description,
@@ -108,22 +108,22 @@ module.exports = {
                 price: fields.price,
                 owner: currentUser._id
             };
-            
+
             if (files.image) {
                 var imageGuid = getImageGuid(files.image);
                 newItem.imageUrl = imageGuid;
             }
-            
+
             Item.create(newItem, function (err, item) {
                 if (err) {
                     res.status(400).send(err);
                     return;
                 }
-                
+
                 res.status(201).send(item);
             });
         });
-        
+
         form.on('error', function (err) {
             res.status(400).send(err);
             return;
@@ -131,61 +131,61 @@ module.exports = {
     },
     updateItem : function (req, res, next) {
         // Update /api/items/:id
-        
+
         if (!fs.existsSync(DEFAULT_UPLOAD_DIRECTORY)) {
             fs.mkdirSync(DEFAULT_UPLOAD_DIRECTORY);
         }
-        
+
         var form = new formidable.IncomingForm();
         form.encoding = 'utf-8';
         form.uploadDir = DEFAULT_UPLOAD_DIRECTORY;
         form.keepExtensions = true;
-        
+
         form.parse(req, function (err, fields, files) {
-            
+
             Item.findOne({ _id: req.params.id }).exec(function (err, item) {
                 if (err) {
                     res.status(400).send('Error updating item: ' + err);
                     console.log('Error updating item: ' + err);
                     return;
                 }
-                
+
                 item.title = fields.title;
                 item.description = fields.description;
                 item.featured = fields.featured;
                 item.category = fields.category;
                 item.price = fields.price;
-                
+
                 if (files.image) {
                     // removes the old image
                     var oldImagePath = DEFAULT_UPLOAD_DIRECTORY + '/' + item.imageUrl;
                     if (fs.existsSync(oldImagePath)) {
                         fs.unlink(oldImagePath);
                     }
-                    
+
                     // set the new imageUrl
                     var newImageGuid = getImageGuid(files.image);
                     item.imageUrl = newImageGuid;
                 }
-                
+
                 item.save(function (err, updatedItem, numberAffected) {
                     if (err) {
                         res.status(400).send('Error updating item: ' + err);
                         return;
                     }
-                    
+
                     res.status(200).send('Item updated successfully!');
                 });
             });
         });
-        
+
         form.on('error', function (err) {
             res.status(400).send(err);
             return;
         });
     },
     getItemsCount: function (req, res, next) {
-        Item.count({}, function (err, count) { 
+        Item.count({}, function (err, count) {
             if (err) {
                 res.status(400).send('Error getting items count: ' + err);
                 return;

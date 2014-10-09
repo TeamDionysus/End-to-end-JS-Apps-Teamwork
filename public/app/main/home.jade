@@ -3,22 +3,21 @@
         #logo-title.h1 Items Exchange
         h2 The best deals for used items
     .row
-        .col-md-4
+        .col-md-offset-3.col-md-6
             form.navbar-form(role="search")
             .input-group
                 input.form-control(type="text" placeholder="Search" name="q" ng-model="query" ng-keyup="$event.keyCode == 13 && findItem(query)")
                 .input-group-btn
                     button.btn.btn-default(ng-click="findItem(query)")
                         i.glyphicon.glyphicon-search
-        .col-md-8.text-right
+        //.col-md-8.text-right
             a.btn.btn-success.btn-lg(href="#/items/create") Add offer
     br
     .row
-        .col-md-6
-            .panel.panel-info
-                .panel-heading.text-center Featured
-                .panel-body(ng-include="'/partials/main/featured-items'")
-        .col-md-6
-            .panel.panel-info
-                .panel-heading.text-center New
-                .panel-body(ng-include="'/partials/main/new-items'")
+        .col-md-12
+            h1.text-center Featured
+            div(items-grid items="items | filter: { featured: true } | limitTo: 6")
+    .row
+        .col-md-12
+            h1.text-center Latest
+            div(items-grid items="items  | orderBy: '-published' | limitTo: 6")

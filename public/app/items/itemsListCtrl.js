@@ -19,18 +19,22 @@ app.controller('ItemsListCtrl', function ($scope, $rootScope, itemsData, Categor
     };
     
     $scope.$watch('currentPage', function (newValue) {
-        if (newValue != 0) {
-            findItem($scope.query);
+        if (newValue !== 0) {
+            findItems();
         }
     });
-        
-    $scope.sort = '-published';
+
+    $scope.orderBy = '-published';
     $scope.query = $rootScope.searchQuery || '';
-    $scope.findItem = findItem;
+    $scope.findItems = findItems;
 
-    function findItem(query) {
+    function findItems() {
 
-        itemsData.getItems($scope.query, $scope.currentPage)
+        console.log('query: ' + $scope.query);
+        console.log('page: :' + $scope.currentPage);
+        console.log('orderBy: ' + $scope.orderBy);
+
+        itemsData.getItems($scope.query, $scope.currentPage, $scope.orderBy)
             .then(function (data) {
                 $scope.items = data;
             });
