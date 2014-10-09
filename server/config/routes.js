@@ -40,7 +40,7 @@ module.exports = function (app) {
         .get('/api/messages/inbox', controllers.messages.getInbox)
         .get('/api/messages/sent', controllers.messages.getSent)
         .get('/api/messages/:id', controllers.messages.getMessageById)
-        .post('/api/messages/send/:id', controllers.messages.sendMessage);
+        .post('/api/messages/send/:username', controllers.messages.sendMessage);
     
     app.get('/partials/:partialArea/:partialName', function (req, res) {
         res.render('../../public/app/' + req.params.partialArea + '/' + req.params.partialName);
