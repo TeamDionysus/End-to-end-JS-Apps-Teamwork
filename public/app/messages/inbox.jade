@@ -1,0 +1,20 @@
+.container
+    .row
+        .col-md-3.col-sm-4
+
+        .col-md-9.col-sm-8
+            ul.nav.nav-tabs
+                li.active
+                    a(href="#home" data-toggle="tab")
+                        span.glyphicon.glyphicon-inbox
+                        |  Primary
+                li
+                    a(href="#profile" data-toggle="tab")
+                        span.glyphicon.glyphicon-user
+                        |  Send by me
+            .tab-content
+                .tab-pane.fade.in.active#home
+                    .list-group
+                        a.list-group.item(href="#")
+                            .col-md-2.col-offset-md-2 {{message.from}}
+                            .col-md-6 {{message.title}}
