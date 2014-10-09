@@ -10,8 +10,9 @@ require('./server/config/mongoose')(config);
 require('./server/config/passport')();
 require('./server/config/routes')(app);
 
-app.listen(config.port);
 
+var server = app.listen(config.port);
+require('./server/config/socket').init(server);
 console.log("NODE_ENV = " + env);
 console.log("Server running on port: " + config.port);
 
