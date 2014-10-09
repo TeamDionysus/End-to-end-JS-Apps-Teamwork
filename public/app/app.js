@@ -68,6 +68,10 @@ app.config(function($routeProvider, $locationProvider) {
             templateUrl: '/partials/admin/users-list',
             controller: 'UserListCtrl',
             resolve: routeUserChecks.adminRole
+        })
+        .when('/categories/:name', {
+            templateUrl: '/partials/categories/category-details',
+            //controller: 'CategoriesCtrl'
         });
 });
 

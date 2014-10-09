@@ -6,7 +6,8 @@ app.directive('itemsGrid', function () {
         templateUrl: '/partials/directives/items-grid',
         scope: {
             items: '=',
-            sort: '='
+            sort: '=',
+            user: '='
         },
         replace: true
     }
