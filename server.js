@@ -11,5 +11,12 @@ require('./server/config/passport')();
 require('./server/config/routes')(app);
 
 app.listen(config.port);
+
 console.log("NODE_ENV = " + env);
 console.log("Server running on port: " + config.port);
+
+module.exports = {
+    app: app,
+    port: config.port,
+    host: 'http://localhost'
+};

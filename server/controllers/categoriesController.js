@@ -7,6 +7,8 @@ module.exports = {
         Category.find({}).sort('name').exec(function (err, collection) {
             if (err) {
                 console.log('Categories could not be loaded: ' + err);
+                res.status(400).send(err);
+                return;
             }
             
             res.send(collection);
@@ -16,6 +18,8 @@ module.exports = {
         Category.findOne({ _id: req.params.id }).exec(function (err, category) {
             if (err) {
                 console.log('Category could not be loaded: ' + err);
+                res.status(400).send(err);
+                return;
             }
             
             res.send(category);
@@ -29,6 +33,8 @@ module.exports = {
         newCategory.save(function (err) {
             if (err) {
                 console.log('Error in saving category: ' + err);
+                res.status(400).send(err);
+                return;
             }
         });
     }
