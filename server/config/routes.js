@@ -14,8 +14,8 @@ module.exports = function (app) {
     app.route('/api/users/:id')
         .get(controllers.users.getById)
         .post( auth.isInRole('admin'), controllers.users.updateByAdmin)
-        .delete( auth.isInRole('admin'), controllers.users.deleteUser);
-    //.put(auth.isAuthenticated(), controllers.users.voteForUser)
+        .delete( auth.isInRole('admin'), controllers.users.deleteUser)
+        .put( auth.isInRole('admin'), controllers.users.makeAdmin);
 
     app.post('/login', auth.login);
     app.post('/logout', auth.logout);
@@ -36,7 +36,10 @@ module.exports = function (app) {
     app.post('/api/categories', controllers.categories.createCategory);
     
     //Messages
-    app.get('/api/messages', controllers.messages.getAllMesssages);
+    app.get('/api/messages/all', controllers.messages.getAll);
+    app.get('/api/messages/inbox', controllers.messages.getInbox);
+    app.get('/api/messages/sent', controllers.messages.getSent);
+    
     app.get('/api/messages/:id', controllers.messages.getMessageById);
     app.post('/api/messages/send/:id', controllers.messages.sendMessage);
     
