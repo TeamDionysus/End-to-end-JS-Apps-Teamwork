@@ -55,6 +55,11 @@ app.config(function($routeProvider, $locationProvider) {
             controller: 'InboxCtrl',
             resolve: routeUserChecks.authenticated
         })
+        .when('/send-message/:username', {
+            templateUrl: '/partials/messages/send-message-form',
+            controller: 'SendMessageCtrl',
+            resole:routeUserChecks.authenticated
+        })
         .when('/signup', {
             templateUrl: '/partials/account/signup',
             controller: 'SignUpCtrl'
