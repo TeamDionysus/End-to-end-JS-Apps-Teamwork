@@ -23,8 +23,8 @@ app.controller('ItemsListCtrl', function ($scope, $rootScope, itemsData, Categor
             findItems();
         }
     });
-        
-    $scope.orderBy = 'published';
+
+    $scope.orderBy = '-published';
     $scope.query = $rootScope.searchQuery || '';
     $scope.findItems = findItems;
 

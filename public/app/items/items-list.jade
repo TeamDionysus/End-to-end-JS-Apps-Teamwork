@@ -12,8 +12,8 @@
             form.navbar-form(role="search")
                 
                 select.form-control(ng-model="orderBy" ng-change="findItems()")
-                    option(value="published" ng-selected="") Newest
-                    option(value="-published" ng-selected="") Oldest
+                    option(value="-published" ng-selected="") Newest
+                    option(value="published") Oldest
                     option(value="price") Low price
                     option(value="-price") High price
                     option(value="title") Title
