@@ -71,7 +71,7 @@ app.config(function($routeProvider, $locationProvider) {
         })
         .when('/categories/:name', {
             templateUrl: '/partials/categories/category-details',
-            //controller: 'CategoriesCtrl'
+            controller: 'CategoriesCtrl'
         });
 });
 
