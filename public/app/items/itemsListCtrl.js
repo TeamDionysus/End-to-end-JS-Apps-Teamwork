@@ -39,11 +39,9 @@ app.controller('ItemsListCtrl', function ($scope, $rootScope, itemsData, Categor
     function findItems() {
         $scope.filters.page = $scope.currentPage;
 
-        console.log(filters);
         itemsData.getItems($scope.filters)
             .then(function (data) {
                 $scope.items = data;
             });
-    }
-    
+    }    
 });

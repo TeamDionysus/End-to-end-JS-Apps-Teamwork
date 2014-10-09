@@ -1,13 +1,13 @@
 ﻿'use strict';
 
-app.directive('itemsGrid', function () {
+app.directive('itemsGrid', function ($filter) {
     return {
         restrict: 'A',
         templateUrl: '/partials/directives/items-grid',
         scope: {
             items: '=',
-            sort: '=',
-            user: '='
+            user: '=',
+            num: '='
         },
         replace: true
     }
