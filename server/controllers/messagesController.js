@@ -69,27 +69,32 @@ module.exports = {
     },
     sendMessage: function (req, res, next) {
         //api/messages/send/:id
-        var newMessage = new Message({
-            content: req.body.content,
-            date: new Date(),
-            from: req.user._id,
-            to: req.params.id,
-            read: false
-        });
-        
-        newMessage.save(function (err) {
-            if (err) {
-                res.send(err);
-                return console.log('Error in saving message' + err);
+        User.findOne({ _id: req.params.id }).exec(function (err, receiver) {
+            if (receiver) {                
+                
+                var newMessage = new Message({
+                    title: req.body.title,
+                    content: req.body.content,
+                    date: new Date(),
+                    from: req.user._id,
+                    to: receiver._id,
+                    read: false
+                });
+
+                newMessage.save(function (err) {
+                    if (err) {
+                        res.status(400).send(err);
+                        return console.log('Error in saving message' + err);
+                    }
+
+                    res.send(newMessage);
+                });
+                
+                receiver.messages.push(newMessage);
+                receiver.save(); 
+            } else {
+                res.status(404).send('User not found!');
             }
-            
-            res.send(newMessage);
-        });
-        
-        // This is not necessary
-        User.findOne({ _id: req.params.id }).exec(function (err, user) {
-            user.messages.push(newMessage);
-            user.save();
         });
     }
 }

@@ -1,4 +1,4 @@
-﻿'use strict';
+'use strict';
 /* global app */
 
 app.controller('CategoriesCtrl', 
@@ -24,7 +24,7 @@ app.controller('CategoriesCtrl',
         }
     });
     
-    $scope.sort = '-published';
+    $scope.orderBy = '-published';
     $scope.query = $rootScope.searchQuery || '';
     $scope.findItem = findItem;
     

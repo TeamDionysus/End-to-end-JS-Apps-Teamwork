@@ -36,7 +36,7 @@ module.exports = function (app) {
     app.post('/api/categories', controllers.categories.createCategory);
     
     //Messages
-    app.all(auth.isAuthenticated)
+    app.all('/api/messages/*', auth.isAuthenticated)
         .get('/api/messages/inbox', controllers.messages.getInbox)
         .get('/api/messages/sent', controllers.messages.getSent)
         .get('/api/messages/:id', controllers.messages.getMessageById)

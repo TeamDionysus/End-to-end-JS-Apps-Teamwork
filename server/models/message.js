@@ -5,6 +5,7 @@ var Message;
 
 module.exports.init = function () {
     var messagesSchema = new mongoose.Schema({
+        title: { type: String, required: '{PATH} is required' },
         content: { type: String, required: '{PATH} is required' },
         date: Date,
         from : {
