@@ -20,7 +20,8 @@ module.exports = function (app) {
     
     app.route('/api/items')
         .get(controllers.items.getAllItems)
-        .post(auth.isAuthenticated, controllers.items.createItem);
+        .post(auth.isAuthenticated, controllers.items.createItem)
+        .put(controllers.items.getItemsCount);
     
     app.route('/api/items/:id')
         .get(controllers.items.getItemById)

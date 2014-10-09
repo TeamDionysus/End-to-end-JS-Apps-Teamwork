@@ -159,5 +159,15 @@ module.exports = {
             res.status(400).send(err);
             return;
         });
+    },
+    getItemsCount: function (req, res, next) {
+        Item.count({}, function (err, count) { 
+            if (err) {
+                res.status(400).send('Error getting items count: ' + err);
+                return;
+            }
+
+            res.status(200).send(count.toString());
+        });
     }
 };

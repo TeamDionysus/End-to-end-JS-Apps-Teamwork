@@ -12,6 +12,20 @@ app.factory('itemsData', function ($http, $q) {
 
         return formData;
     };
+    
+    var getItemsCount = function () {
+        var deferred = $q.defer();
+        
+        $http.put('/api/items')
+            .success(function (count) {
+                deferred.resolve(count);
+            })
+            .error(function (error) {
+                deferred.reject(error);
+            });
+        
+        return deferred.promise;
+    };
 
     var createItem = function (newItem) {
         var deferred = $q.defer();
@@ -53,12 +67,12 @@ app.factory('itemsData', function ($http, $q) {
         return deferred.promise;
     };
 
-    var getItems = function(query) {
+    var getItems = function(query, page) {
         var deferred = $q.defer();
         
-        query = query ? '?title=' + query : '';
+        query = query ? '&title=' + query : '';
         
-        $http.get('/api/items' + query)
+        $http.get('/api/items?page=' + page + query)
             .success(function (items) {
             deferred.resolve(items);
         })
@@ -87,6 +101,7 @@ app.factory('itemsData', function ($http, $q) {
         create: createItem,
         update: updateItem,
         getItems: getItems,
-        getById: getById
+        getById: getById,
+        getCount: getItemsCount
     }
 });
