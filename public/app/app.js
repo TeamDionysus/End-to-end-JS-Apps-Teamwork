@@ -2,7 +2,7 @@
 
 'use strict';
 
-var app = angular.module('app', ['ngResource', 'ngRoute', 'angularFileUpload', 'ui.bootstrap']).value('toastr', toastr);
+var app = angular.module('app', ['ngResource', 'ngRoute', 'ui.bootstrap']).value('toastr', toastr);
 
 app.config(function($routeProvider, $locationProvider) {
 

@@ -20,7 +20,7 @@ app.controller('ItemUpdateCtrl', function ($scope, $routeParams, $location, item
         itemsData.update($scope.currentItemId, $scope.item).then(
             function (success) {
                 notifier.success("Offer updated successfully!");
-                $location.path('/');
+                $location.path('/profile');
             },
             function (error) {
                 notifier.error(error.message);

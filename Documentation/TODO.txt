@@ -18,6 +18,3 @@
 - error handling and data validation to avoid crashes when invalid data is entered
 - Unit Tests
 - да го качим в Heroku (с подходящо име и лого)
-
-
-

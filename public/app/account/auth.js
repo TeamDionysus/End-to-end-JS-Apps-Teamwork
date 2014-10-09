@@ -3,7 +3,8 @@
 'use strict';
 
 
-app.factory('auth', function($http, $q, identity, UsersResource) {
+app.factory('auth', function ($http, $q, identity, UsersResource) {
+    
     return {
         signup: function(user) {
             var deferred = $q.defer();
@@ -11,21 +12,6 @@ app.factory('auth', function($http, $q, identity, UsersResource) {
             user = new UsersResource(user);
             user.$save().then(function() {
                 identity.currentUser = user;
-                deferred.resolve();
-            }, function(response) {
-                deferred.reject(response);
-            });
-
-            return deferred.promise;
-        },
-        update: function(user) {
-            var deferred = $q.defer();
-
-            var updatedUser = new UsersResource(user);
-            updatedUser._id = identity.currentUser._id;
-            updatedUser.$update().then(function() {
-                identity.currentUser.firstName = updatedUser.firstName;
-                identity.currentUser.lastName = updatedUser.lastName;
                 deferred.resolve();
             }, function(response) {
                 deferred.reject(response);
