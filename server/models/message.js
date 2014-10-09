@@ -1,4 +1,4 @@
-﻿'use strict';
+'use strict';
 
 var mongoose = require('mongoose');
 var Message;
@@ -14,7 +14,8 @@ module.exports.init = function () {
         to: {
             type: mongoose.Schema.Types.ObjectId,
             ref: 'User'
-        }
+        },
+        read: Boolean
     });
     
     Message = mongoose.model('Message', messagesSchema);

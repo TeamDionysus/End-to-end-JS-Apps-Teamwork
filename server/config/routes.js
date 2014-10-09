@@ -36,12 +36,11 @@ module.exports = function (app) {
     app.post('/api/categories', controllers.categories.createCategory);
     
     //Messages
-    app.get('/api/messages/all', controllers.messages.getAll);
-    app.get('/api/messages/inbox', controllers.messages.getInbox);
-    app.get('/api/messages/sent', controllers.messages.getSent);
-    
-    app.get('/api/messages/:id', controllers.messages.getMessageById);
-    app.post('/api/messages/send/:id', controllers.messages.sendMessage);
+    app.all(auth.isAuthenticated)
+        .get('/api/messages/inbox', controllers.messages.getInbox)
+        .get('/api/messages/sent', controllers.messages.getSent)
+        .get('/api/messages/:id', controllers.messages.getMessageById)
+        .post('/api/messages/send/:id', controllers.messages.sendMessage);
     
     app.get('/partials/:partialArea/:partialName', function (req, res) {
         res.render('../../public/app/' + req.params.partialArea + '/' + req.params.partialName);
