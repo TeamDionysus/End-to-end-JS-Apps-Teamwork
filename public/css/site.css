@@ -179,3 +179,6 @@ footer {
   padding: 0 6px;
   font-size: 10.5px;
 }
+.pagination ul>li:not(disabled) {
+  cursor: pointer;
+}
