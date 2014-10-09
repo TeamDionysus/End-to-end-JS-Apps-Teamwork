@@ -2,24 +2,21 @@
 
 'use strict';
 
-app.controller('InboxCtrl', function InboxCtrl($scope, messagesData, notifier) {
+app.controller('InboxCtrl', function InboxCtrl($scope, messagesData, notifier, identity) {
 
-//    messagesData.getInbox()
-//        .then(function (messages) {
-//            $scope.messages = messages;
-//        }, function(error){
-//            notifier.error(error.message || error || "Unable to get inbox messages");
-//        });
+    $scope.user = identity.currentUser;
 
-    $scope.messages = [
-        {
-            title: 'Some message',
-            from: {
-                username: 'Pesho'
-            },
-            date: '12.12.2006'
-        }
-    ];
+    messagesData.getInbox()
+        .then(function (messages) {
+            $scope.messages = messages;
+        }, function(error){
+            notifier.error(error.message || error || "Unable to get inbox messages");
+        });
 
-    console.log($scope.messages);
+    messagesData.getSendByMe()
+        .then(function (messages) {
+            $scope.messagesByMe = messages;
+        }, function(error){
+            notifier.error(error.message || error || "Unable to get inbox messages");
+        });
 });
