@@ -5,14 +5,12 @@ app.controller('SendMessageCtrl',
     
     $scope.sendMessage = function (message, sendMessageForm) {
         
-        //console.log(message);
-        
         if (sendMessageForm.$valid) {
             messagesData.sendMessage(message)
             .then(
             function (success) {
                 notifier.success("Message sent successfully!");
-            //$location.path('/');
+                //$location.path('/inbox/sendByMe');
             },
             function (error) {
                 notifier.error(error.message);

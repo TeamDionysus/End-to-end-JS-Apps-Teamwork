@@ -11,12 +11,7 @@ app.factory('messagesData', function messagesData($http, $q, $routeParams, ident
     var sendMessage = function (newMessage) {
         var deferred = $q.defer();
         
-        console.log(newMessage);
-        
-        $http.post('/api/messages/send/' + $routeParams.username, newMessage, {
-            //transformRequest: angular.identity,
-            //headers: { 'Content-Type': undefined }
-        })
+        $http.post('/api/messages/send/' + $routeParams.username, newMessage)
         .success(function (message) {
             deferred.resolve(message);
         })
