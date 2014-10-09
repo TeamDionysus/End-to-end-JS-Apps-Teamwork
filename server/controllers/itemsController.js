@@ -25,7 +25,7 @@ module.exports = {
         Item.find()
             .where({ title: new RegExp(title, "i") })
             .where({ category: new RegExp(category, "i") })
-            .sort(orderBy)
+            .sort(orderType + orderBy)
             .skip(DEFAULT_PAGE_SIZE * (page - 1))
             .limit(DEFAULT_PAGE_SIZE)
             //.select('_id title price')
@@ -41,13 +41,13 @@ module.exports = {
         var title = req.query.title || '';
         var category = req.query.category || '';
         var orderBy = req.query.orderBy || 'published';
-//        var orderType = req.query.orderType === 'desc' ? '' : '-';
+        var orderType = req.query.orderType === 'desc' ? '' : '-';
         var page = Math.max(req.query.page, 1);
 
         Item.find({ owner: req.params.id })
             .where({ title: new RegExp(title, "i") })
             .where({ category: new RegExp(category, "i") })
-            .sort(orderBy)
+            .sort(orderType + orderBy)
             .skip(DEFAULT_PAGE_SIZE * (page - 1))
             .limit(DEFAULT_PAGE_SIZE)
             //.select('_id title price')
@@ -61,7 +61,7 @@ module.exports = {
     },
     getItemById: function (req, res, next) {
         Item.findOne({ _id: req.params.id })
-            .populate('owner', 'username firstName lastName city phone imageUrl')    
+            .populate('owner', 'username firstName lastName city phone imageUrl')
             .exec(function (err, item) {
                 if (err) {
                     res.status(400).send('Item could not be loaded: ' + err);
