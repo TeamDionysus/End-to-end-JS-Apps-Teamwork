@@ -36,6 +36,8 @@ app.controller('MainCtrl', function ($scope, $rootScope, $location, identity, it
     $rootScope.searchQuery = '';
     
     $scope.findItem = function (query) {
+        ping();
+        identity.socket.emit('ping');
         if (query) {
             
             $rootScope.searchQuery = query;
@@ -43,8 +45,10 @@ app.controller('MainCtrl', function ($scope, $rootScope, $location, identity, it
         }
     };
     
-    $scope.ping = function () {
-        console.log('- ping');
-        identity.socket.emit('ping');
+    function ping() {
+        if (identity.socket) {
+            console.log('- ping');
+            identity.socket.emit('ping');
+        }
     }
 });

@@ -22,14 +22,15 @@ var jwt_secret = 'foo bar big secret';
 var sio = socketIo.listen(server);
 
 // With socket.io >= 1.0
-sio.use(socketio_jwt.authorize({
-  secret: jwt_secret,
-  handshake: true
-}));
+//sio.use(socketio_jwt.authorize({
+//  secret: jwt_secret,
+//  handshake: true
+//}));
 
 sio.sockets
   .on('connection', function (socket) {
-    console.log(socket.decoded_token.username, 'connected');
+    //console.log(socket.decoded_token.username, 'connected');
+      console.log('connected');
     socket.on('ping', function (m) {
       socket.emit('pong', m);
     });

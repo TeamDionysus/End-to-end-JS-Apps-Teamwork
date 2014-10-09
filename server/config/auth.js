@@ -33,7 +33,6 @@ module.exports = {
                 }                
 
                 user.token = getSocketToken(user); 
-                console.log(user.token);
                 res.send({success: true, user: user, token: user.token});
             });
         });
