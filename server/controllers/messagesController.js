@@ -95,7 +95,10 @@ module.exports = {
                     }
 
                     res.send(newMessage);
-                    clients[receiver.username].emit('newMessage', { from: sender.username });
+					if(clients[receiver.username])
+					{
+						clients[receiver.username].emit('newMessage', { from: sender.username });
+					}
                 });
                 
                 receiver.messages.push(newMessage);
