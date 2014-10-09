@@ -3,6 +3,7 @@
 var mongoose = require('mongoose');
 var Message = mongoose.model('Message');
 var User = mongoose.model('User');
+var clients = require('../config/socket').clients;
 
 module.exports = {
     getInbox : function (req, res, next) {
@@ -94,6 +95,7 @@ module.exports = {
                     }
 
                     res.send(newMessage);
+                    clients[receiver.username].emit('newMessage', { from: sender.username });
                 });
                 
                 receiver.messages.push(newMessage);

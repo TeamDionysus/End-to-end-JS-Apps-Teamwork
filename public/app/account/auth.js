@@ -3,7 +3,7 @@
 'use strict';
 
 
-app.factory('auth', function ($http, $q, identity, UsersResource) {
+app.factory('auth', function ($http, $q, identity, UsersResource, notifier) {
     
     function connect (token) {
         console.log('Opening socket on the client');
@@ -11,16 +11,24 @@ app.factory('auth', function ($http, $q, identity, UsersResource) {
         'forceNew': true
       });
 
-      socket.on('pong', function () {
-        console.log('- pong');
-      }).on('time', function (data) {
-        console.log('- broadcast: ' + data);
-      }).on('authenticated', function () {
-        console.log('- authenticated');
-      }).on('disconnect', function () {
-        console.log('- disconnected');
-      });
-        
+      socket
+        .on('pong', function () {
+            console.log('- pong');
+        })
+        .on('time', function (data) {
+            console.log('- broadcast: ' + data);
+        })
+        .on('newMessage', function (data) {
+            console.log('New message from ' + data.from);
+            notifier.success('New message from ' + data.from);
+        })
+        .on('authenticated', function () {
+            console.log('- authenticated');
+        })
+        .on('disconnect', function () {
+            console.log('- disconnected');
+        });
+
         return socket;
     }
     
