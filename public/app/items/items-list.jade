@@ -5,14 +5,15 @@
             .input-group
                 input.form-control(type="text" placeholder="Search" name="q" ng-model="query" ng-keyup="$event.keyCode == 13 && findItem(query)")
                 .input-group-btn
-                    button.btn.btn-default(ng-click="findItem(query)")
+                    button.btn.btn-default(ng-click="findItems()")
                         i.glyphicon.glyphicon-search                        
                     
         .col-md-4
             form.navbar-form(role="search")
                 
-                select.form-control(ng-model="sort")
-                    option(value="-published") Newest
+                select.form-control(ng-model="orderBy" ng-change="findItems()")
+                    option(value="published" ng-selected="") Newest
+                    option(value="-published" ng-selected="") Oldest
                     option(value="price") Low price
                     option(value="-price") High price
                     option(value="title") Title
@@ -26,5 +27,5 @@
 
         .col-md-9
             div(data-pagination="" data-num-pages="numPages()" data-current-page="currentPage" data-max-size="maxSize" data-boundary-links="true")
-            div(items-grid items="items" sort="sort")
+            div(items-grid items="items")
             div(data-pagination="" data-num-pages="numPages()" data-current-page="currentPage" data-max-size="maxSize" data-boundary-links="true")

@@ -113,14 +113,14 @@ module.exports = {
         User
             .findOne({ _id: req.params.id })
             .remove()
-            .exec(function (err, item) {
+            .exec(function (err, count) {
                 if (err) {
                     res.status(400).send('User could not be found: ' + err);
                     console.log('User could not be found: ' + err);
                     return;
                 }
 
-                res.status(200).send("User deleted successfully from database" + item);
+                res.status(200).send("User deleted successfully");
             });
     },
     updateByAdmin: function (req, res, next) {
@@ -145,5 +145,36 @@ module.exports = {
             }
             res.status(200).send('User updated successfully');
         });
+    },
+    makeAdmin: function (req, res, next) {
+        User
+            .findOne({ _id: req.params.id })
+            .exec(function (err, user) {
+
+                if (err) {
+                    console.log('User cannot be found: ' + err);
+                    res.status(404);
+                    res.send('User cannot be found: ' + err);
+                    return;
+                }
+
+                if (user.roles.indexOf('admin') >= 0) {
+                    res.send('User is already admin');
+                }
+                else {
+
+                    user.roles.push('admin');
+
+                    user.save(function (err, user) {
+                        if (err) {
+                            res.status(400);
+                            res.send('User cannot be changed: ' + err);
+                            return;
+                        }
+
+                        res.send('User updated successfully');
+                    });
+                }
+            });
     }
 };

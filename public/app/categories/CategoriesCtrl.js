@@ -2,20 +2,38 @@
 /* global app */
 
 app.controller('CategoriesCtrl', 
-    function CategoriesCtrl($scope, $routeParams, CategoryResource) {
+    function CategoriesCtrl($scope, $rootScope, $routeParams, CategoryResource, itemsData) {
     
-    $scope.items;
-    $scope.getItemsByCategoryName = getItemsByCategoryName;
-    $scope.data = $scope.getItemsByCategoryName();
+    $scope.categories = CategoryResource.get();
+    $scope.currentPage = 1;
+    $scope.numPerPage = 12;
+    $scope.maxSize = 5;
     
-    function getItemsByCategoryName() {
-        CategoryResource.getByName($routeParams.name)
-           .then(function (response) {
-            console.log(response);
-               $scope.items = response;
-
-        }, function (err) {
-            console.log(err.error_description);
+    itemsData.getCount()
+            .then(function (count) {
+        $scope.itemsCount = parseInt(count);
+    });
+    
+    $scope.numPages = function () {
+        return Math.ceil($scope.itemsCount / $scope.numPerPage);
+    };
+    
+    $scope.$watch('currentPage', function (newValue) {
+        if (newValue != 0) {
+            findItem($scope.query);
+        }
+    });
+    
+    $scope.sort = '-published';
+    $scope.query = $rootScope.searchQuery || '';
+    $scope.findItem = findItem;
+    
+    function findItem(query) {
+        
+        itemsData.getItems($scope.query, $scope.currentPage, $scope.orderBy, $routeParams.name)
+                    .then(function (data) {
+            $scope.title = $routeParams.name;
+            $scope.items = data;
         });
     }
 });
