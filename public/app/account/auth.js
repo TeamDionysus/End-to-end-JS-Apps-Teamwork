@@ -5,6 +5,26 @@
 
 app.factory('auth', function ($http, $q, identity, UsersResource) {
     
+    var token, socket;
+
+    function connect (token) {
+    socket = io('http://localhost').connect(token ? ('?token=' + token) : '', {
+        'forceNew': true
+      });
+
+      socket.on('pong', function () {
+        console.log('- pong');
+      }).on('time', function (data) {
+        console.log('- broadcast: ' + data);
+      }).on('authenticated', function () {
+        console.log('- authenticated');
+      }).on('disconnect', function () {
+        console.log('- disconnected');
+      });
+        
+        return socket;
+    }
+    
     return {
         signup: function(user) {
             var deferred = $q.defer();
@@ -27,6 +47,8 @@ app.factory('auth', function ($http, $q, identity, UsersResource) {
                     var user = new UsersResource();
                     angular.extend(user, response.user);
                     identity.currentUser = user;
+                    identity.token = response.token;
+                    identity.socket = connect(token);
                     deferred.resolve(true);
                 }
                 else {

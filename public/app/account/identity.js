@@ -4,12 +4,16 @@
 
 app.factory('identity', function($window, UsersResource) {
     var user;
+    var token;
+    var socket;
     if ($window.bootstrappedUserObject) {
         user = new UsersResource();
         angular.extend(user, $window.bootstrappedUserObject);
     }
     return {
         currentUser: user,
+        token: token,
+        socket: socket,
         isAuthenticated: function() {
             return !!this.currentUser;
         },

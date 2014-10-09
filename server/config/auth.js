@@ -1,6 +1,21 @@
 'use strict';
 
 var passport = require('passport');
+var jwt = require('jsonwebtoken');
+var jwt_secret = 'foo bar big secret';
+
+function getSocketToken(user) {
+        var profile = {
+            _id: user._id,
+            username: user.username,
+            firstName: user.firstName,
+            lastName: user.lastName
+        };
+
+      // We are sending the profile inside the token
+      var token = jwt.sign(profile, jwt_secret, { expiresInMinutes: 60*5 });
+    return token;
+}
 
 module.exports = {
     login: function (req, res, next) {
@@ -15,8 +30,11 @@ module.exports = {
             req.logIn(user, function (err) {
                 if (err) {
                     return next(err);
-                }
-                res.send({success: true, user: user});
+                }                
+
+                user.token = getSocketToken(user); 
+                console.log(user.token);
+                res.send({success: true, user: user, token: user.token});
             });
         });
 

@@ -28,4 +28,9 @@ app.controller('MainCtrl', function($scope, $rootScope, $location, identity, ite
             $location.path('/items');
         }
     };
+    
+    $scope.ping = function () {
+        console.log('- ping');
+        identity.socket.emit('ping');
+    }
 });
