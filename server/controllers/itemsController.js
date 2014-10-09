@@ -23,23 +23,26 @@ module.exports = {
         var page = Math.max(req.query.page, 1);
         var featured = req.query.featured || false;
 
-        Item.find()
-            .where({ featured: featured})
+        var query = Item.find()
             .where({ title: new RegExp(title, "i") })
             .where({ category: new RegExp(category, "i") })
             .sort(orderBy)
             .skip(DEFAULT_PAGE_SIZE * (page - 1))
-            .limit(DEFAULT_PAGE_SIZE)
-            //.select('_id title price')
-            .exec(function (error, collection) {
-                if (error) {
-                    console.error('Error getting items: ' + error);
-                } else {
-                    res.send(collection);
-                }
-            });
+            .limit(DEFAULT_PAGE_SIZE);
+
+        if (featured) {
+            query.where({ featured: featured});
+        }
+        //.select('_id title price')
+        query.exec(function (error, collection) {
+            if (error) {
+                console.error('Error getting items: ' + error);
+            } else {
+                res.send(collection);
+            }
+        });
     },
-    getByUserId: function(req, res, next){
+    getByUserId: function (req, res, next) {
         var title = req.query.title || '';
         var category = req.query.category || '';
         var orderBy = req.query.orderBy || 'published';
@@ -131,7 +134,7 @@ module.exports = {
             return;
         });
     },
-    updateItem : function (req, res, next) {
+    updateItem: function (req, res, next) {
         // Update /api/items/:id
 
         if (!fs.existsSync(DEFAULT_UPLOAD_DIRECTORY)) {
