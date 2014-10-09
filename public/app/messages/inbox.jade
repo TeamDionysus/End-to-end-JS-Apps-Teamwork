@@ -48,6 +48,8 @@
                                 |  Reply
                             .collapse(id="colapse{{message._id}}")
                                     .col-md-offset-2.well {{message.content}}
+                        .list-group-item(ng-hide="messages")
+                            h3.text-info No messages
 
                 .tab-pane#sendByMe
                     .list-group
@@ -64,5 +66,8 @@
                                 |  Reply
                             .collapse(id="colapse-send-{{message._id}}")
                                 .col-md-offset-2.well {{message.content}}
+                        .list-group-item(ng-hide="messagesByMe")
+                            h3.text-info No messages
+
 
 //TODO: chnage senByMe messages collection
