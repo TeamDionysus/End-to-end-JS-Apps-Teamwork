@@ -14,8 +14,8 @@ module.exports = function (app) {
     app.route('/api/users/:id')
         .get(controllers.users.getById)
         .post( auth.isInRole('admin'), controllers.users.updateByAdmin)
-        .delete( auth.isInRole('admin'), controllers.users.deleteUser);
-    //.put(auth.isAuthenticated(), controllers.users.voteForUser)
+        .delete( auth.isInRole('admin'), controllers.users.deleteUser)
+        .put( auth.isInRole('admin'), controllers.users.makeAdmin);
 
     app.post('/login', auth.login);
     app.post('/logout', auth.logout);
