@@ -9,15 +9,18 @@
                         i.fa.fa-user
                         span.list-group-item-text  {{user.username}}
                     li.list-group-item
-                        i.fa.fa-mobile-phone
+                        i.glyphicon.glyphicon-user
+                        span.list-group-item-text  {{user.firstName + ' ' + user.lastName}}
+                    li.list-group-item
+                        i.glyphicon.glyphicon-phone
                         span.list-group-item-text  {{user.phone}}
                     li.list-group-item
-                        i.fa.fa-foursquare
+                        i.glyphicon.glyphicon-globe
                         span.list-group-item-text  {{user.city}}
                     a(href='')
                         li.list-group-item
                             i.fa.fa-envelope
-                            span.list-group-item-heading  Send me message
+                            span.list-group-item-heading  Send message
         .col-md-8
             .row
                 .col-sm-4.col-lg-4.col-md-4(ng-repeat="item in user.items | orderBy: -item.published")

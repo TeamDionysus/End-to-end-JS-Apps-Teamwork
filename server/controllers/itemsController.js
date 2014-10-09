@@ -38,7 +38,6 @@ module.exports = {
         });
     },
     getByUserId: function(req, res, next){
-        console.log('Here!!!');
         var title = req.query.title || '';
         var category = req.query.category || '';
         var orderBy = req.query.orderBy || 'published';

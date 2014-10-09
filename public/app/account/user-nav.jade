@@ -5,17 +5,13 @@ ul.nav.navbar-nav.navbar-right(ng-controller="NavCtrl")
     li(ng-hide="identity.isAuthenticated()")
         a(href="#/signup") Sign Up
     li(ng-show="identity.isAuthenticated()")
-        a(href="#/myads")
+        a(href="#/profile")
             span.fa.fa-shopping-cart
             |  My Ads
     li(ng-show="identity.isAuthenticated()")
         a(href="#/inbox")
             span.fa.fa-envelope
             |  Inbox
-
-
-
-
     li.dropdown(ng-show="identity.isAuthenticated()")
         a.dropdown-toggle(href="", data-toggle="dropdown")
             span.fa.fa-user

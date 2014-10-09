@@ -9,10 +9,13 @@
                         i.fa.fa-user
                         span.list-group-item-text  {{user.username}}
                     li.list-group-item
-                        i.fa.fa-mobile-phone
+                        i.glyphicon.glyphicon-user
+                        span.list-group-item-text  {{user.firstName + ' ' + user.lastName}}
+                    li.list-group-item
+                        i.glyphicon.glyphicon-phone
                         span.list-group-item-text  {{user.phone}}
                     li.list-group-item
-                        i.fa.fa-foursquare
+                        i.glyphicon.glyphicon-globe
                         span.list-group-item-text  {{user.city}}
                     a(href='#/settings')
                         li.list-group-item

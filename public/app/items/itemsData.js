@@ -82,11 +82,26 @@ app.factory('itemsData', function ($http, $q) {
         
         return deferred.promise;        
     };
+
+    var getByUserId = function(id){
+        var deferred = $q.defer();
+
+        $http.get('/api/users/' + id + '/items')
+            .success(function(items){
+                deferred.resolve(items);
+            })
+            .error(function(error){
+                deferred.reject(error);
+            });
+
+        return deferred.promise;
+    };
     
     return {
         create: createItem,
         update: updateItem,
         getItems: getItems,
-        getById: getById
-    }
+        getById: getById,
+        getByUserId: getByUserId
+    };
 });

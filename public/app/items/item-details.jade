@@ -6,26 +6,24 @@
             .thumbnail
                   img(src="images/{{ item.imageUrl }}", alt="{{ item.title }}")
             p {{item.description}}
-        .col-md-4.pull-right.well
-            h3 {{item.price}}$
-            br
-            strong Published on: 
-            | {{item.published | date: 'MMM dd, yyyy'}} 
-    .row
-        .col-md-4.pull-right.well
-            div
-                strong User: 
-                | {{item.owner.firstName + ' ' + item.owner.lastName}}
-            br
-            div
-                strong City: 
-                | {{item.owner.city}}
-                
-            br   
-            div
-                strong Contact: 
-                | {{item.owner.phone}}
-            br   
-            div
-                button.btn.btn-info Send message
-            
+        .col-md-4.col-md-offset-4
+            .row.well
+                h3 {{item.price}}$
+                br
+                strong Published on:
+                |  {{item.published | date: 'MMM dd, yyyy'}}
+            .row.well
+                div
+                    strong User:
+                    a(href="#/users/{{item.owner._id}}")  {{item.owner.firstName + ' ' + item.owner.lastName}}
+                    br
+                    div
+                        strong City:
+                        |  {{item.owner.city}}
+                        br
+                    div
+                        strong Contact:
+                        |  {{item.owner.phone}}
+                    br
+                    div
+                        button.btn.btn-info Send message

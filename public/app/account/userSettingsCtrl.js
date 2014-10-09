@@ -40,8 +40,8 @@ app.controller('UserSettingsCtrl', function ($scope, $location, $upload, auth, i
         username: identity.currentUser.username,
         firstName: identity.currentUser.firstName,
         lastName: identity.currentUser.lastName,
-        phone: identity.currentUser.phone,
-        city: identity.currentUser.city,
+        phone: identity.currentUser.phone || '',
+        city: identity.currentUser.city || '',
         imageUrl: identity.currentUser.imageUrl,
         items: [
             {"_id": "543589bf2cca167410a33bd2", "title": "tester", "description": "teast", "published": "2014-10-08T19:00:15.784Z", "category": "Books", "price": 12, "owner": "543548853ce89a3c0d487789", "imageUrl": "aa99ee87f164ec4a8a518d5bffec8f0a.ico", "__v": 0},
