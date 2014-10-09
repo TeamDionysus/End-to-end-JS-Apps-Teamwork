@@ -5,7 +5,7 @@ var formidable = require('formidable');
 var Item = require('mongoose').model('Item');
 
 var DEFAULT_UPLOAD_DIRECTORY = './public/images';
-var DEFAULT_PAGE_SIZE = 10;
+var DEFAULT_PAGE_SIZE = 12;
 
 var getImageGuid = function (image) {
     var guidIndex = image.path.lastIndexOf('\\');

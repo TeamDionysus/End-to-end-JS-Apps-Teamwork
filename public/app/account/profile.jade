@@ -22,4 +22,5 @@
                             i.fa.fa-gear
                             span.list-group-item-heading  Settings
         .col-md-8
-            div(items-grid items="user.items" sort="sort")
+            div(data-pagination="" data-num-pages="numPages()" data-current-page="currentPage" data-max-size="maxSize" data-boundary-links="true")
+            div(items-grid items="user.filteredItems" sort="sort")

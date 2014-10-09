@@ -6,7 +6,7 @@ app.controller('ItemsListCtrl', function ($scope, $rootScope, itemsData, Categor
     
     $scope.categories = CategoryResource.get();
     $scope.currentPage = 1;
-    $scope.numPerPage = 10;
+    $scope.numPerPage = 12;
     $scope.maxSize = 5;
     
     itemsData.getCount()
