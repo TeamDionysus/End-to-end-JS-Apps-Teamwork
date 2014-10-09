@@ -58,7 +58,7 @@ module.exports = {
                 if (message) {
                     res.send(message);
                     // Mark as read
-                    if (!message.read && message.to == currentUser._id) {
+                    if (!message.read && message.to.username == currentUser.username) {
                         message.read = true;
                         message.save();
                     }
@@ -68,15 +68,21 @@ module.exports = {
             });
     },
     sendMessage: function (req, res, next) {
-        //api/messages/send/:id
-        User.findOne({ _id: req.params.id }).exec(function (err, receiver) {
-            if (receiver) {                
+        //api/messages/send/:username
+        var sender = req.user;
+        User.findOne({ username: req.params.username }).exec(function (err, receiver) {
+            if (receiver) {  
+                
+                if (receiver.username == sender.username) {
+                    res.status(404).send('You cannot send message to your self!');
+                    return;
+                }
                 
                 var newMessage = new Message({
                     title: req.body.title,
                     content: req.body.content,
                     date: new Date(),
-                    from: req.user._id,
+                    from: sender._id,
                     to: receiver._id,
                     read: false
                 });
