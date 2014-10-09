@@ -15,22 +15,21 @@ console.log("NODE_ENV = " + env);
 console.log("Server running on port: " + config.port);
 
 // Websocket
-var socketIo = require('socket.io');
+var sio = require('socket.io').listen(server);
 var socketio_jwt = require('socketio-jwt');
-var jwt = require('jsonwebtoken');
-var jwt_secret = 'foo bar big secret';
-var sio = socketIo.listen(server);
+var secret = 'foo bar big secret';
 
-// With socket.io >= 1.0
-//sio.use(socketio_jwt.authorize({
-//  secret: jwt_secret,
-//  handshake: true
-//}));
-
+////With socket.io >= 1.0
+sio.use(socketio_jwt.authorize({
+  secret: secret,
+  handshake: true
+}));
+var clients = {};
 sio.sockets
   .on('connection', function (socket) {
-    //console.log(socket.decoded_token.username, 'connected');
-      console.log('connected');
+      var username = socket.decoded_token.username;
+    console.log(username, 'connected');
+      clients[username] = socket;
     socket.on('ping', function (m) {
       socket.emit('pong', m);
     });

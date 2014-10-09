@@ -13,7 +13,7 @@ function getSocketToken(user) {
         };
 
       // We are sending the profile inside the token
-      var token = jwt.sign(profile, jwt_secret, { expiresInMinutes: 60*5 });
+      var token = jwt.sign({username: user.username}, jwt_secret, { expiresInMinutes: 60*5 });
     return token;
 }
 

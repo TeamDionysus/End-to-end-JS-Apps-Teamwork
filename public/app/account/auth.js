@@ -5,10 +5,9 @@
 
 app.factory('auth', function ($http, $q, identity, UsersResource) {
     
-    var token, socket;
-
     function connect (token) {
-    socket = io('http://localhost').connect(token ? ('?token=' + token) : '', {
+        console.log('Opening socket on the client');
+      var socket = io.connect(token ? ('?token=' + token) : '', {
         'forceNew': true
       });
 
@@ -48,7 +47,7 @@ app.factory('auth', function ($http, $q, identity, UsersResource) {
                     angular.extend(user, response.user);
                     identity.currentUser = user;
                     identity.token = response.token;
-                    identity.socket = connect(token);
+                    identity.socket = connect(response.token);
                     deferred.resolve(true);
                 }
                 else {
