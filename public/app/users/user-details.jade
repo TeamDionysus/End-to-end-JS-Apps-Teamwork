@@ -22,4 +22,5 @@
                             i.fa.fa-envelope
                             span.list-group-item-heading  Send message
         .col-md-8
-            div(items-grid items="user.items" sort="sort")
+            div(data-pagination="" data-num-pages="numPages()" data-current-page="currentPage" data-max-size="maxSize" data-boundary-links="true")
+            div(items-grid items="user.items" num="numPerPage")
