@@ -67,15 +67,16 @@ app.factory('itemsData', function ($http, $q) {
         return deferred.promise;
     };
 
-    var getItems = function(query, page, orderBy, category) {
+    var getItems = function(query, page, orderBy, category, isFeatured) {
         var deferred = $q.defer();
         
         query = query ? '&title=' + query : '';
         page = page ? '&page=' + page : '';
         orderBy = orderBy ? '&orderBy=' + orderBy : '';
         category = category ? '&category=' + category : '';
+        isFeatured = isFeatured ? '&featured=' + isFeatured : '';
         
-        $http.get('/api/items?' + page + query + orderBy + category)
+        $http.get('/api/items?' + page + query + orderBy + category + isFeatured)
             .success(function (items) {
             deferred.resolve(items);
         })

@@ -21,8 +21,10 @@ module.exports = {
         var orderBy = req.query.orderBy || '-published';
         var orderType = req.query.orderType === 'asc' ? '' : '-';
         var page = Math.max(req.query.page, 1);
+        var featured = req.query.featured || false;
 
         Item.find()
+            .where({ featured: featured})
             .where({ title: new RegExp(title, "i") })
             .where({ category: new RegExp(category, "i") })
             .sort(orderBy)

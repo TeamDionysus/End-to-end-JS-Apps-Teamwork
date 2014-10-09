@@ -50,6 +50,11 @@ app.config(function($routeProvider, $locationProvider) {
             templateUrl: '/partials/users/user-details',
             controller: 'UserDetailsCtrl'
         })
+        .when('/inbox', {
+            templateUrl: '/partials/messages/inbox',
+            controller: 'InboxCtrl',
+            resolve: routeUserChecks.authenticated
+        })
         .when('/signup', {
             templateUrl: '/partials/account/signup',
             controller: 'SignUpCtrl'
