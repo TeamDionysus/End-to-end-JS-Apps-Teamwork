@@ -36,16 +36,17 @@
                 .tab-pane.active#inbox
                     .list-group
                         .list-group-item(ng-repeat="message in messages", ng-if="messages")
-                            a.row(data-toggle="collapse", data-parent="#accordion" href="#colapse{{message._id}}" target="_self")
-                                img.col-xs-1.media-object(ng-src="images/{{ message.from.imageUrl }}" alt="avatar")
-                                span.text-muted.col-xs-2 {{message.from.username}}
-                                span.label.label-default {{message.date | date}}
-                                span.label.label-danger(ng-hide="message.read") New
-                                .col-xs-3 {{message.title}}
+                            .row
+                                a(data-toggle="collapse", data-parent="#accordion" href="#colapse{{message._id}}" target="_self")
+                                    img.col-xs-1.media-object(ng-src="images/{{ message.from.imageUrl }}" alt="avatar")
+                                    span.text-muted.col-xs-2 {{message.from.username}}
+                                    span.label.label-default {{message.date | date}}
+                                    span.label.label-danger(ng-hide="message.read") New
+                                    .col-xs-3 {{message.title}}
 
-                            a.col-md-2.pull-right(href="#/messages/send/{{message.from.username}}")
-                                i.fa.fa-reply
-                                |  Reply
+                                a.col-md-2.pull-right(href="#/send-message/{{message.from.username}}")
+                                    i.fa.fa-reply
+                                    |  Reply
                             .collapse(id="colapse{{message._id}}")
                                     .col-md-offset-2.well {{message.content}}
                         .list-group-item(ng-hide="messages")
@@ -54,16 +55,16 @@
                 .tab-pane#sendByMe
                     .list-group
                         .list-group-item(ng-repeat="message in messagesByMe", ng-if="messagesByMe")
-                            a.row(data-toggle="collapse", data-parent="#accordion" href="#colapse-send-{{message._id}}" target="_self")
-                                img.col-xs-1.media-object(ng-src="images/{{ message.to.imageUrl }}" alt="avatar")
-                                span.text-muted.col-xs-2 {{message.to.username}}
-                                span.label.label-default {{message.date | date}}
-                                span.label.label-danger(ng-hide="message.read") New
-                                .col-xs-3 {{message.title}}
+                            .row
+                                a(data-toggle="collapse", data-parent="#accordion" href="#colapse-send-{{message._id}}" target="_self")
+                                        img.col-xs-1.media-object(ng-src="images/{{ message.to.imageUrl }}" alt="avatar")
+                                        span.text-muted.col-xs-2 {{message.to.username}}
+                                        span.label.label-default {{message.date | date}}
+                                        .col-xs-3 {{message.title}}
 
-                            a.col-md-2.pull-right(href="#/send/{{message.from._id}}")
-                                i.fa.fa-reply
-                                |  Reply
+                                a.col-md-2.pull-right(href="#/send-message/{{message.to.username}}")
+                                    i.fa.fa-plus
+                                    |  new
                             .collapse(id="colapse-send-{{message._id}}")
                                 .col-md-offset-2.well {{message.content}}
                         .list-group-item(ng-hide="messagesByMe")
