@@ -7,12 +7,6 @@ var Item = require('mongoose').model('Item');
 var DEFAULT_UPLOAD_DIRECTORY = './public/images';
 var DEFAULT_PAGE_SIZE = 12;
 
-//var getImageGuid = function (image) {
-//    var guidIndex = image.path.lastIndexOf('/');
-//    var guid = image.path.substring(guidIndex + 1);
-//    return guid;
-//};
-
 var getImageGuid = function (image) {
     var guidIndex = image.path.lastIndexOf('/');
     if (guidIndex < 0) {
@@ -89,18 +83,30 @@ module.exports = {
     },
     deleteItem: function (req, res, next) {
         // DELETE /api/items/{id}
-        Item.findOneAndRemove({ _id: req.params.id }, function (err, item) {
-            if (err) {
-                console.log('Item not found: ' + err);
-                res.status(404).send('Item not found: ' + err);
-                return;
+        
+        if (process.env.NODE_ENV) {
+            return res.status(403).send({message: 'Deleting new items has been disabled for security reasons!'});
+        }
+        
+        Item.findOne({ _id: req.params.id }, function (err, item) {
+            if (err || !item) {
+                return res.status(404).send('Item not found!');
             }
-
+            
+            if (!item.owner.equals(req.user._id) && req.user.roles.indexOf('admin') < 0) {
+                return res.status(400).send('Only item owners and admins can delete items!');   
+            }    
+            
+            item.remove();
             res.send(item);
         });
     },
     createItem: function (req, res, next) {
         // CREATE /api/items
+        
+        if (process.env.NODE_ENV) {
+            return res.status(403).send({message: 'Creating new items has been disabled for security reasons!'});
+         }
 
         if (!fs.existsSync(DEFAULT_UPLOAD_DIRECTORY)) {
             fs.mkdirSync(DEFAULT_UPLOAD_DIRECTORY);
@@ -145,10 +151,14 @@ module.exports = {
         });
     },
     updateItem: function (req, res, next) {
-        // Update /api/items/:id
+        // PUT /api/items/:id        
+            
+        if (process.env.NODE_ENV) {
+            return res.status(403).send({message: 'Updating new items has been disabled for security reasons!'});
+        }
 
         if (!fs.existsSync(DEFAULT_UPLOAD_DIRECTORY)) {
-            fs.mkdirSync(DEFAULT_UPLOAD_DIRECTORY);
+            fs.mkdirSync(DEFAULT_UPLOAD_DIRECTORY);            
         }
 
         var form = new formidable.IncomingForm();
@@ -157,6 +167,9 @@ module.exports = {
         form.keepExtensions = true;
 
         form.parse(req, function (err, fields, files) {
+            if (err) {
+                return res.status(400).send({ message: 'Error parsing form!', error: err});   
+            }
 
             Item.findOne({ _id: req.params.id }).exec(function (err, item) {
                 if (err) {
@@ -164,7 +177,11 @@ module.exports = {
                     console.log('Error updating item: ' + err);
                     return;
                 }
-
+        
+                if (!item.owner.equals(req.user._id) && req.user.roles.indexOf('admin') < 0) {
+                    return res.status(400).send('Only item owners and admins can edit items!');   
+                }  
+                
                 item.title = fields.title;
                 item.description = fields.description;
                 item.featured = fields.featured;

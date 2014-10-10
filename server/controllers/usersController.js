@@ -8,12 +8,6 @@ var DEFAULT_PAGE_SIZE = 10;
 var DEFAULT_UPLOAD_DIRECTORY = './public/images';
 var DEFAULT_AVATAR = 'default-avatar.jpg';
 
-//var getImageGuid = function (image) {
-//    var guidIndex = image.path.lastIndexOf('\\');
-//    var guid = image.path.substring(guidIndex + 1);
-//    return guid;
-//};
-
 var getImageGuid = function (image) {
     var guidIndex = image.path.lastIndexOf('/');
     if (guidIndex < 0) {
@@ -149,7 +143,8 @@ module.exports = {
             res.send(item);
         });
     },
-    deleteUser: function (req, res, next) {
+    deleteUser: function (req, res, next) {        
+        // Allowed for admins
         User
             .findOne({ _id: req.params.id })
             .remove()

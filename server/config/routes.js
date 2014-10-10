@@ -4,6 +4,8 @@ var auth = require('./auth'),
     controllers = require('../controllers');
 
 module.exports = function (app) {
+    
+    // Users
     app.route('/api/users')
         .get(controllers.users.getAllUsers)
         .post(controllers.users.createUser)
@@ -20,6 +22,7 @@ module.exports = function (app) {
     app.post('/login', auth.login);
     app.post('/logout', auth.logout);
     
+    // Items
     app.route('/api/items')
         .get(controllers.items.getAllItems)
         .post(auth.isAuthenticated, controllers.items.createItem)
@@ -27,7 +30,7 @@ module.exports = function (app) {
     
     app.route('/api/items/:id')
         .get(controllers.items.getItemById)
-        .delete(controllers.items.deleteItem)
+        .delete(auth.isAuthenticated, controllers.items.deleteItem)
         .put(auth.isAuthenticated, controllers.items.updateItem);
     
     //Categories
