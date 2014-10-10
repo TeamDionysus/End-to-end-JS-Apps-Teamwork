@@ -8,7 +8,7 @@ var DEFAULT_UPLOAD_DIRECTORY = './public/images';
 var DEFAULT_PAGE_SIZE = 12;
 
 var getImageGuid = function (image) {
-    var guidIndex = image.path.lastIndexOf('\\');
+    var guidIndex = image.path.lastIndexOf('/');
     var guid = image.path.substring(guidIndex + 1);
     return guid;
 };
