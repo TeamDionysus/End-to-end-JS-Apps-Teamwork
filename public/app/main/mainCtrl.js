@@ -10,7 +10,7 @@ app.controller('MainCtrl', function ($scope, $rootScope, $location, identity, it
         orderBy : '-published',
         query: ''
     };
-    
+
     $scope.num = 6;
     
     itemsData.getItems($scope.filters).then(function (res, err) {

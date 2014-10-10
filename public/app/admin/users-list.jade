@@ -6,10 +6,27 @@
             table.table
                 h3 Users
                 hr
+                row
+                    .col-md-4
+                        .input-group
+                            input.form-control(type="text" placeholder="Search" ng-model="request.username" ng-keyup="$event.keyCode == 13 && filter(request)")
+                            .input-group-btn
+                                button.btn.btn-default(ng-click="filter(request)")
+                                    i.glyphicon.glyphicon-search
+
+                    div(pager)
                 .row
+                    tr
+                        th
+                        th Username
+                        th First Name
+                        th Last Name
                     tr(ng-repeat="user in users")
+                        td
+                            img.small-avatar(ng-src="images/{{user.imageUrl}}")
                         td {{ user.firstName }}
                         td {{ user.lastName }}
+                        td {{ user.username }}
                         td
                             .btn-group
                                 a.btn.btn-primary(href="#/users/{{user._id}}")

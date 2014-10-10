@@ -4,11 +4,21 @@
 
 app.controller('UserListCtrl', function($scope, UsersResource, adminData, notifier, identity) {
 
-    function reloadUsers() {
-        $scope.users = UsersResource.query();
+
+    $scope.request = {
+        page: 1
+    };
+
+    function filter(request) {
+       UsersResource.query(request).$promise
+            .then(function(users) {
+                $scope.users = users;
+            });
     }
 
-    reloadUsers();
+    filter($scope.request);
+
+    $scope.filter = filter;
 
     $scope.deleteUser = function(id){
 
@@ -16,7 +26,7 @@ app.controller('UserListCtrl', function($scope, UsersResource, adminData, notifi
             adminData.deleteUser(id)
                 .then(function (success) {
                     notifier.success(success.message || success);
-                    reloadUsers();
+                    filter($scope.request);
                 }, function (error) {
                     notifier.error(error.message || error);
                 }
@@ -31,7 +41,7 @@ app.controller('UserListCtrl', function($scope, UsersResource, adminData, notifi
         adminData.makeAdmin(id)
             .then(function(success){
                 notifier.success(success.message || success);
-                reloadUsers();
+                filter($scope.request);
             },function(error){
                 notifier.error(error.message || error);
             }
