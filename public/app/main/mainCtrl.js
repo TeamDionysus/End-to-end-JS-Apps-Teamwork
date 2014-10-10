@@ -36,8 +36,13 @@ app.controller('MainCtrl', function ($scope, $rootScope, $location, identity, it
     $rootScope.searchQuery = '';
     
     $scope.findItem = function (query) {
-        ping();
-        identity.socket.emit('ping');
+        
+        if (identity.socket) {
+            identity.socket.emit('ping');
+            ping();
+        } else {
+            console.log('No socket yet, login first.');   
+        }
         if (query) {
             
             $rootScope.searchQuery = query;
