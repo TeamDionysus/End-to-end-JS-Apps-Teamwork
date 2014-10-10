@@ -1,13 +1,14 @@
 ul.nav.navbar-nav.navbar-right(ng-controller="NavCtrl")
-
-    li(ng-hide="identity.isAuthenticated()")
-        a(href="#/login") Sign In
-    li(ng-hide="identity.isAuthenticated()")
-        a(href="#/signup") Sign Up
+        
     li(ng-show="identity.isAuthenticated()")
-        a(href="#/items/create")
+        a(href="#/items/create" ng-show="identity.isAuthenticated()")
+            span.glyphicon.glyphicon-plus-sign
+            |  New Ad            
+    li(ng-hide="identity.isAuthenticated()")
+        a(href="#/signup" ng-show="!identity.isAuthenticated()")
             span.glyphicon.glyphicon-plus-sign
             |  New Ad
+            
     li(ng-show="identity.isAuthenticated()")
         a(href="#/profile")
             span.fa.fa-shopping-cart
@@ -39,3 +40,7 @@ ul.nav.navbar-nav.navbar-right(ng-controller="NavCtrl")
                 a(href="#" ng-click="logout()")
                     span.fa.fa-fw.fa-power-off
                     | Sign Out
+    li(ng-hide="identity.isAuthenticated()")
+        a(href="#/signup") Register 
+    li(ng-hide="identity.isAuthenticated()")
+        a(href="#/login") Sign In
