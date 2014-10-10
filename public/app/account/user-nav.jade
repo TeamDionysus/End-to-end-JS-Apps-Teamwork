@@ -1,9 +1,13 @@
 ul.nav.navbar-nav.navbar-right(ng-controller="NavCtrl")
 
     li(ng-hide="identity.isAuthenticated()")
-        a(href="#/login") Sing In
+        a(href="#/login") Sign In
     li(ng-hide="identity.isAuthenticated()")
         a(href="#/signup") Sign Up
+    li(ng-show="identity.isAuthenticated()")
+        a(href="#/items/create")
+            span.glyphicon.glyphicon-plus-sign
+            |  New Ad
     li(ng-show="identity.isAuthenticated()")
         a(href="#/profile")
             span.fa.fa-shopping-cart
