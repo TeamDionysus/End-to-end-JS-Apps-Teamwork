@@ -15,3 +15,9 @@ var server = app.listen(config.port);
 require('./server/config/socket').init(server);
 console.log("NODE_ENV = " + env);
 console.log("Server running on port: " + config.port);
+
+module.exports = {
+    app: app,
+    port: config.port,
+    host: 'http://localhost'
+};

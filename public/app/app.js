@@ -79,6 +79,11 @@ app.config(function($routeProvider, $locationProvider) {
             controller: 'UserListCtrl',
             resolve: routeUserChecks.adminRole
         })
+        .when('/admin/items', {
+            templateUrl: '/partials/admin/items-list',
+            controller: 'ItemsAdminController',
+            resolve: routeUserChecks.adminRole
+        })
         .when('/categories/:name', {
             templateUrl: '/partials/categories/category-details',
             controller: 'CategoriesCtrl'
