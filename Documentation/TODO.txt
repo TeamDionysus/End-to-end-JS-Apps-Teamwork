@@ -1,4 +1,4 @@
-﻿- fix pagination when a search is made
+- fix pagination when a search is made
 - New Add must be always visible, but lead to reg/login when when unath
 - finish /users/{id}/edit
 - responsive carousel slider: http://owlgraphic.com/owlcarousel/#demo
