@@ -1,4 +1,4 @@
-﻿.container
+.container
     .row.text-center
         h1 {{title}}
     .row
@@ -20,7 +20,7 @@
                     option(value="-price") High price
                     option(value="title") Title
         .col-md-4.text-right
-            a.btn.btn-success.btn-lg(href="#/items/create") Add offer
+            a.btn.btn-success.btn-lg(href="#/items/create" ng-show="identity.isAuthenticated()") Add offer
 
      br
     .row

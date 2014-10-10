@@ -39,25 +39,35 @@ function addPassword(user) {
 
 module.exports.seedInitialUsers = function(callback) {
     
-    if (!process.env.NODE_ENV) {
+    User.count({}, function (err, count) {
+        if (err) {
+            return console.log(err);            
+        }
         
-        User.remove({}, function (err) {
-            if (err) return console.log(err);            
-            
-            var users = require('./users.json');
-            users.forEach(function (user) {
-                addPassword(user);
-            });
-            
-            User.create(users, function (err) {
-                if (err) return console.log(err);
-                
-                console.log('Database seeded with users...');
-                
-                if (typeof(callback) === "function") {
-                    callback();
-                }
-            });
-        });  
-    }
+        // if db is empty or we are in development mode -> seed
+        if (count == 0 || !process.env.NODE_ENV) {
+            seed(callback);
+        }
+    });
 };
+
+function seed(callback) {        
+    User.remove({}, function (err) {
+        if (err) return console.log(err);            
+
+        var users = require('./users.json');
+        users.forEach(function (user) {
+            addPassword(user);
+        });
+
+        User.create(users, function (err) {
+            if (err) return console.log(err);
+
+            console.log('Database seeded with users...');
+
+            if (typeof(callback) === "function") {
+                callback();
+            }
+        });
+    }); 
+}

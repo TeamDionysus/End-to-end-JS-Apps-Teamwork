@@ -1,13 +1,14 @@
-﻿'use strict';
+'use strict';
 /* global app */
 
 app.controller('CategoriesCtrl',
-    function CategoriesCtrl($scope, $rootScope, $routeParams, CategoryResource, itemsData) {
+    function CategoriesCtrl($scope, $rootScope, $routeParams, CategoryResource, itemsData, identity) {
         $scope.title = $routeParams.name;
         $scope.categories = CategoryResource.get();
         $scope.currentPage = 1;
         $scope.numPerPage = 12;
         $scope.maxSize = 5;
+        $scope.identity = identity;
 
         var filters = {
             orderBy: '-published',

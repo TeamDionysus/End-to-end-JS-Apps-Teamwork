@@ -2,7 +2,7 @@
 
 'use strict';
 
-app.controller('ItemsListCtrl', function ($scope, $rootScope, itemsData, CategoryResource) {
+app.controller('ItemsListCtrl', function ($scope, $rootScope, itemsData, CategoryResource, identity) {
 
     var filters = {
         orderBy: '-published',
@@ -10,6 +10,7 @@ app.controller('ItemsListCtrl', function ($scope, $rootScope, itemsData, Categor
         page: $scope.currentPage
     };
 
+    $scope.identity = identity;
     $scope.filters = filters;
 
     $scope.categories = CategoryResource.get();
