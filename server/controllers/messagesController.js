@@ -72,11 +72,10 @@ module.exports = {
         //api/messages/send/:username
         var sender = req.user;
         User.findOne({ username: req.params.username }).exec(function (err, receiver) {
-            if (receiver) {  
+            if (receiver) {
                 
-                if (receiver.username == sender.username) {
-                    res.status(404).send('You cannot send message to your self!');
-                    return;
+                if (receiver._id.equals(sender._id)) {
+                    return res.status(404).send({message: 'You cannot send message to your self!'});                    
                 }
                 
                 var newMessage = new Message({
