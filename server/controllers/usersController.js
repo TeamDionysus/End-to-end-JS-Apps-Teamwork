@@ -8,8 +8,18 @@ var DEFAULT_PAGE_SIZE = 10;
 var DEFAULT_UPLOAD_DIRECTORY = './public/images';
 var DEFAULT_AVATAR = 'default-avatar.jpg';
 
+//var getImageGuid = function (image) {
+//    var guidIndex = image.path.lastIndexOf('\\');
+//    var guid = image.path.substring(guidIndex + 1);
+//    return guid;
+//};
+
 var getImageGuid = function (image) {
-    var guidIndex = image.path.lastIndexOf('\\');
+    var guidIndex = image.path.lastIndexOf('/');
+    if (guidIndex < 0) {
+        var guidIndex = image.path.lastIndexOf('\\');
+    }
+
     var guid = image.path.substring(guidIndex + 1);
     return guid;
 };
