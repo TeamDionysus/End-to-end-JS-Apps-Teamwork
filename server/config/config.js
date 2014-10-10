@@ -7,12 +7,11 @@ module.exports = {
     development: {
         rootPath: rootPath,
         db: 'mongodb://localhost/item-exchange',
-        //db: 'mongodb://admin:123456q@ds039950.mongolab.com:39950/academy-courses',
         port: process.env.PORT || 3030
     },
     production: {
         rootPath: rootPath,
-        db: 'mongodb://admin:123456q@ds039950.mongolab.com:39950/academy-courses',
+        db: 'admin:123456q@ds039950.mongolab.com:39950/itemex',
         port: process.env.PORT || 3030
     }
 };
