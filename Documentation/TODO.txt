@@ -1,12 +1,4 @@
-﻿- да изтрием courses папки, контролери, ресурси и т.н.
-
-- Messages:
-	- "/user/send" - логнат потребител за праща съобщения
-	- "/user/inbox" - моя инбокс (логнат)
-	- push notifications със WebSockets
-
-- error handling and data validation to avoid crashes when invalid data is entered
-- Unit Tests
-- да го качим в Heroku (с подходящо име и лого)
-
-checkout this: http://owlgraphic.com/owlcarousel/demos/
+﻿- fix pagination when a search is made
+- New Add must be always visible, but lead to reg/login when when unath
+- finish /users/{id}/edit
+- responsive carousel slider: http://owlgraphic.com/owlcarousel/#demo
