@@ -12,7 +12,7 @@
                     .col-md-10
                         input#description.form-control(type="text", placeholder="Description", ng-model="item.description")
                 .form-group
-                    label.col-md-2.control-label(for="categories") Categories
+                    label.col-md-2.control-label(for="categories") Category
                     .col-md-10
                         select#categories.form-control(ng-model="item.category", required)
                             option(ng-repeat="category in categories", value="{{category.name}}") {{category.name}}
