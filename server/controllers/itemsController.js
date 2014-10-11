@@ -85,7 +85,7 @@ module.exports = {
         // DELETE /api/items/{id}
         
         if (process.env.NODE_ENV) {
-            return res.status(403).send({message: 'Deleting new items has been disabled for security reasons!'});
+            return res.status(403).send({message: 'Deleting items has been disabled for security reasons!'});
         }
         
         Item.findOne({ _id: req.params.id }, function (err, item) {
@@ -154,7 +154,7 @@ module.exports = {
         // PUT /api/items/:id        
             
         if (process.env.NODE_ENV) {
-            return res.status(403).send({message: 'Updating new items has been disabled for security reasons!'});
+            return res.status(403).send({message: 'Updating items has been disabled for security reasons!'});
         }
 
         if (!fs.existsSync(DEFAULT_UPLOAD_DIRECTORY)) {
