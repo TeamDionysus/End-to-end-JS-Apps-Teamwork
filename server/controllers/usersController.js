@@ -76,6 +76,11 @@ module.exports = {
                 user.city = fields.city;
 
                 if (files.image) {
+                    
+                    if (process.env.NODE_ENV) {
+                        return res.status(403).send({message: 'Changing profile photos has been disabled for security reasons!'});
+                     }
+                    
                     // removes the old image
                     var oldImagePath = DEFAULT_UPLOAD_DIRECTORY + '/' + user.imageUrl;
                     if (user.imageUrl !== DEFAULT_AVATAR && fs.existsSync(oldImagePath)) {

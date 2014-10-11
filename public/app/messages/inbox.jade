@@ -29,9 +29,9 @@
                         span.glyphicon.glyphicon-inbox
                         |  Inbox
                 li
-                    a(href="#sendByMe" target="_self" data-toggle="tab")
+                    a(href="#sent" target="_self" data-toggle="tab")
                         span.glyphicon.glyphicon-user
-                        |  Send by me
+                        |  Sent
             .tab-content
                 .tab-pane.active#inbox
                     .list-group
@@ -52,7 +52,7 @@
                         .list-group-item(ng-hide="messages")
                             h3.text-info No messages
 
-                .tab-pane#sendByMe
+                .tab-pane#sent
                     .list-group
                         .list-group-item(ng-repeat="message in messagesByMe", ng-if="messagesByMe")
                             .row
@@ -71,4 +71,4 @@
                             h3.text-info No messages
 
 
-//TODO: chnage senByMe messages collection
+//TODO: chnage sent messages collection
