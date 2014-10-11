@@ -1,3 +1,8 @@
+- disable user profile photo uploads
+- add favicon
+- "SenT by me"
+- fix Mistral font for Mac
+
 - fix pagination when a search is made
 - finish /users/{id}/edit
 - responsive carousel slider: http://owlgraphic.com/owlcarousel/#demo
