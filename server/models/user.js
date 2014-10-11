@@ -30,7 +30,6 @@ module.exports.init = function () {
 };
 
 function addPassword(user) {
-    // Password is the same as the username
     var salt = encryption.generateSalt();
     var hashedPwd = encryption.generateHashedPassword(salt, user.username);
     user.salt = salt;
