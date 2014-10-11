@@ -19,7 +19,7 @@ app.controller('UserSettingsCtrl', function ($scope, $location, auth, usersData,
             auth.logout();
             $location.path('/login');
         }, function (err) {
-            notifier.error('Update error: ' + err);
+            notifier.error(err.message);
         });
     };
 });
