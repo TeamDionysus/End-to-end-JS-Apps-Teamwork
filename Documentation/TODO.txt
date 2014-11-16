@@ -1,3 +1,4 @@
+- Escape html and sanitize input
 - fix Mistral font for Mac
 - fix pagination when a search is made
 - finish /users/{id}/edit
