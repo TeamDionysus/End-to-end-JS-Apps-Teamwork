@@ -1,12 +1,15 @@
 body {
+  font-family: 'Roboto', sans-serif;
+}
+body {
   padding-top: 80px;
 }
 body .navbar-brand {
-  font-family: mistral;
+  font-family: 'Dancing Script', cursive;
   font-size: 28px;
 }
 #logo-title {
-  font-family: mistral;
+  font-family: 'Dancing Script', cursive;
   color: #f39;
 }
 .ratings {

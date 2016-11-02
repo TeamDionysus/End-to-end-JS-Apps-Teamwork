@@ -1,5 +1,4 @@
 - Escape html and sanitize input
-- fix Mistral font for Mac
 - fix pagination when a search is made
 - finish /users/{id}/edit
 - responsive carousel slider: http://owlgraphic.com/owlcarousel/#demo
